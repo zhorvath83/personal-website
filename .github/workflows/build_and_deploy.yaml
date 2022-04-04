@@ -27,11 +27,9 @@ jobs:
         with:
           tokenPrefix: '¤{'
           tokenSuffix: '}'
-          files: '["**/config.yaml"]'
+          files: '["**/config.yaml","**/resume.json"]'
         env:
           PROJECT_OWNER_EMAIL: ${{ secrets.PROJECT_OWNER_EMAIL }}
-          PROJECT_OWNER_NAME: ${{ secrets.PROJECT_OWNER_NAME }}
-          PROJECT_OWNER_USERNAME: ${{ secrets.PROJECT_OWNER_USERNAME }}
           ROOT_DOMAIN: ${{ secrets.ROOT_DOMAIN }}
 
       - uses: kelvintaywl/action-jsonresume-export@v1

@@ -3,7 +3,7 @@ baseURL: 'https://¤{ROOT_DOMAIN}/'
 googleAnalytics: ''
 languageCode: hu
 defaultContentLanguage: hu
-title: ¤{PROJECT_OWNER_NAME}
+title: Zoltán Horváth
 theme: hermit
 pygmentsCodefences: true
 pygmentsUseClasses: true
@@ -12,7 +12,7 @@ copyright: ''
 enableEmoji: true
 disableKinds: RSS
 author:
-  name: ¤{PROJECT_OWNER_NAME}
+  name: Zoltán Horváth
 blackfriday: {}
 # do not create any taxonomies
 disableKinds:
@@ -39,11 +39,11 @@ params:
     - css/style.css
   social:
     - name: linkedin
-      url: 'https://www.linkedin.com/in/¤{PROJECT_OWNER_USERNAME}'
+      url: 'https://www.linkedin.com/in/zhorvath83'
     - name: github
-      url: 'https://github.com/¤{PROJECT_OWNER_USERNAME}'
+      url: 'https://github.com/zhorvath83'
     - name: stackshare
-      url: 'https://stackshare.io/¤{PROJECT_OWNER_USERNAME}/my-stack'
+      url: 'https://stackshare.io/zhorvath83/my-stack'
     - name: email
       url: 'mailto:¤{PROJECT_OWNER_EMAIL}'
 menu:

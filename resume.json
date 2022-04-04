@@ -13,13 +13,13 @@
 		},
 		"profiles": [{
 				"network": "LinkedIn",
-				"username": "¤{PROJECT_OWNER_USERNAME}",
-				"url": "https://linkedin.com/in/¤{PROJECT_OWNER_USERNAME}"
+				"username": "zhorvath83",
+				"url": "https://linkedin.com/in/zhorvath83"
 			},
 			{
 				"network": "GitHub",
-				"username": "¤{PROJECT_OWNER_USERNAME}",
-				"url": "https://github.com/¤{PROJECT_OWNER_USERNAME}"
+				"username": "zhorvath83",
+				"url": "https://github.com/zhorvath83"
 			}
 		]
 	},
