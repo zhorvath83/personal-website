@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: Track3/hermit
-          path: $GITHUB_WORKSPACE/themes/hermit
+          path: themes/hermit
 
       - name: Replace variables
         uses: cschleiden/replace-tokens@v1
@@ -40,7 +40,7 @@ jobs:
           theme: macchiato
           resume_filepath: resume.json
           # modifies the index.html in-place
-          output_filepath: $GITHUB_WORKSPACE/content/resume/index.html
+          output_filepath: content/resume/index.html
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
@@ -58,75 +58,3 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-
-
-
-
-
-
-
-
-
-
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v1
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build and push resume-stage
-        id: docker_build_resume_stage
-        uses: docker/build-push-action@v2
-        with:
-          context: ./
-          target: resume-stage
-          push: true
-          platforms: linux/amd64
-          tags: ${{ env.IMAGE }}:resume-build-stage
-          cache-from: type=registry,ref=${{ env.IMAGE }}:resume-build-cache
-          cache-to: type=registry,ref=${{ env.IMAGE }}:resume-build-cache,mode=max
-        
-      - name: Build and push hugo-stage
-        id: docker_build_hugo_stage
-        uses: docker/build-push-action@v2
-        with:
-          context: ./
-          target: hugo-stage
-          push: true
-          platforms: linux/amd64
-          tags: ${{ env.IMAGE }}:hugo-build-stage
-          cache-from: type=registry,ref=${{ env.IMAGE }}:hugo-build-cache
-          cache-to: type=registry,ref=${{ env.IMAGE }}:hugo-build-cache,mode=max
-
-      - name: Build and push final-stage
-        id: docker_build_final_stage
-        uses: docker/build-push-action@v2
-        with:
-          context: ./
-          target: final-stage
-          push: true
-          platforms: linux/amd64
-          tags: ${{ env.IMAGE }}:${{ steps.generate_tag.outputs.BUILD_ID }}
-          cache-from: type=registry,ref=${{ env.IMAGE }}:build-cache
-          cache-to: type=registry,ref=${{ env.IMAGE }}:build-cache,mode=max
-
-      - name: Run Trivy vulnerability scan
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: '${{ env.IMAGE }}:${{ steps.generate_tag.outputs.BUILD_ID }}'
-          format: 'sarif'
-          output: 'trivy-results.sarif'
-          severity: 'CRITICAL,HIGH'
-
-      - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v1
-        with:
-          sarif_file: 'trivy-results.sarif'
