@@ -51,7 +51,7 @@ jobs:
         run: hugo --minify
 
       - name: Deploy to Netlify
-        uses: nwtgck/actions-netlify@v1.1
+        uses: nwtgck/actions-netlify@v1.2
         with:
           publish-dir: './public'
           production-branch: main
