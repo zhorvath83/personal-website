@@ -1,4 +1,4 @@
-name: Build and push private-website
+name: Build and deploy private-website to Netlify
 
 on:
   push:
@@ -13,8 +13,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          submodules: true  # Fetch Hugo themes (true OR recursive)
-          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+          submodules: true
+          fetch-depth: 0
 
       - name: Checkout theme repository
         uses: actions/checkout@v3
@@ -43,6 +43,7 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
+          # renovate: datasource=github-releases depName=gohugoio/hugo
           hugo-version: '0.91.2'
 
       - name: Build
