@@ -1,4 +1,4 @@
-name: Build and deploy private-website to Netlify
+name: Deploy private-website to Netlify
 
 on:
   push:

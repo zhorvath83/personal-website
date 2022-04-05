@@ -1,4 +1,4 @@
-name: ghcr-retention
+name: GHCR container retention
 
 on:
   workflow_dispatch:

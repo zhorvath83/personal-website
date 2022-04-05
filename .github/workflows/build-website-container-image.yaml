@@ -1,4 +1,4 @@
-name: Build and push private-website
+name: Build private-website docker image
 
 on:
   workflow_dispatch:
