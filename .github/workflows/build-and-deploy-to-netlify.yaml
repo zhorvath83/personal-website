@@ -30,6 +30,7 @@ jobs:
           files: '["**/config.yaml","**/resume.json"]'
         env:
           PROJECT_OWNER_EMAIL: ${{ secrets.PROJECT_OWNER_EMAIL }}
+          PROJECT_OWNER_PHONE:  ${{ secrets.PROJECT_OWNER_PHONE }}
           ROOT_DOMAIN: ${{ secrets.ROOT_DOMAIN }}
 
       - uses: kelvintaywl/action-jsonresume-export@v1
