@@ -1,5 +1,5 @@
 # HUGO configuration
-baseURL: 'https://¤{ROOT_DOMAIN}/'
+baseURL: 'https://horvathzoltan.me/'
 googleAnalytics: ''
 languageCode: hu
 defaultContentLanguage: hu
@@ -45,12 +45,12 @@ params:
     - name: stackshare
       url: 'https://stackshare.io/zhorvath83/my-stack'
     - name: email
-      url: 'mailto:¤{PROJECT_OWNER_EMAIL}'
+      url: 'mailto:mail@horvathzoltan.me'
 menu:
   main:
     - name: Resume
       url: resume/
       weight: 10
     - name: Login
-      url: 'https://dash.¤{ROOT_DOMAIN}'
+      url: 'https://dash.horvathzoltan.me'
       weight: 20

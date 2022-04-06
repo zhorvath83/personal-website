@@ -28,16 +28,16 @@ jobs:
             vnsuffix=${{ github.run_number }}
             echo "::set-output name=BUILD_ID::${vnprefix}.${vnsuffix}"
 
-      - name: Replace variables
-        uses: cschleiden/replace-tokens@v1
-        with:
-          tokenPrefix: '¤{'
-          tokenSuffix: '}'
-          files: '["**/config.yaml","**/resume.json"]'
-        env:
-          PROJECT_OWNER_EMAIL: ${{ secrets.PROJECT_OWNER_EMAIL }}
-          PROJECT_OWNER_PHONE:  ${{ secrets.PROJECT_OWNER_PHONE }}
-          ROOT_DOMAIN: ${{ secrets.ROOT_DOMAIN }}
+      # - name: Replace variables
+      #   uses: cschleiden/replace-tokens@v1
+      #   with:
+      #     tokenPrefix: '¤{'
+      #     tokenSuffix: '}'
+      #     files: '["**/config.yaml","**/resume.json"]'
+      #   env:
+      #     PROJECT_OWNER_EMAIL: ${{ secrets.PROJECT_OWNER_EMAIL }}
+      #     PROJECT_OWNER_PHONE:  ${{ secrets.PROJECT_OWNER_PHONE }}
+      #     ROOT_DOMAIN: ${{ secrets.ROOT_DOMAIN }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
