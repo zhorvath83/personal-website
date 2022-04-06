@@ -1,5 +1,5 @@
 # HUGO configuration
-baseURL: 'https://¤{ROOT_DOMAIN}'
+baseURL: 'https://¤{ROOT_DOMAIN}/'
 title: Zoltán Horváth
 theme: ["hugo-cloak-email", "hugo-coder"]
 languageCode: en
