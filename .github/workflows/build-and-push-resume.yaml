@@ -1,0 +1,51 @@
+name: Build and push resume 
+ 
+on:
+  push:
+    paths:
+      - 'resume.json'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Replace variables
+        uses: cschleiden/replace-tokens@v1
+        with:
+          tokenPrefix: '¤{'
+          tokenSuffix: '}'
+          files: '["**/config.yaml","**/resume.json"]'
+        env:
+          PROJECT_OWNER_EMAIL: ${{ secrets.PROJECT_OWNER_EMAIL }}
+          PROJECT_OWNER_PHONE:  ${{ secrets.PROJECT_OWNER_PHONE }}
+          ROOT_DOMAIN: ${{ secrets.ROOT_DOMAIN }}
+
+      - uses: kelvintaywl/action-jsonresume-export@v1
+        name: Export resume as HTML
+        with:
+          theme: macchiato
+          resume_filepath: resume.json
+          output_filepath: content/resume/index.html
+
+      - name: Commit published HTML
+        id: commit
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          if [ -n "$(git status --porcelain content/resume/index.html)" ]; then
+            git add content/resume/index.html
+            git commit -m "chore(content/resume/index.html): update resume page"
+            echo ::set-output name=exit_code::0
+          else
+            echo ::set-output name=exit_code::1
+          fi
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        if: steps.commit.outputs.exit_code == 0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
