@@ -1,4 +1,4 @@
-# This is a multi-stage Dockerfile
+# This is a multi-stage Dockerfile 
 
 ########################################################## Stage 1
 FROM alpine:3.15.3 AS resume-stage
