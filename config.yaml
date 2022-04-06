@@ -4,7 +4,7 @@ googleAnalytics: ''
 languageCode: hu
 defaultContentLanguage: hu
 title: Zoltán Horváth
-theme: hermit
+theme: ["hugo-cloak-email", "hermit"]
 pygmentsCodefences: true
 pygmentsUseClasses: true
 rssLimit: 10
