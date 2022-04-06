@@ -25,8 +25,8 @@ jobs:
       - name: Checkout theme repository
         uses: actions/checkout@v3
         with:
-          repository: luizdepra/hugo-coder
-          path: themes/hugo-coder
+          repository: Track3/hermit
+          path: themes/hermit
 
       - name: Replace variables
         uses: cschleiden/replace-tokens@v1
