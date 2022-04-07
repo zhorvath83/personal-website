@@ -1,9 +1,7 @@
 name: Deploy private-website to Netlify
 
 on:
-  push:
-    branches:
-      - 'main'
+  workflow_dispatch:
 
 jobs:
   building-private-website:
