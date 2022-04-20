@@ -8,7 +8,7 @@ RUN apk add npm git
 RUN npm init -y
 
 # renovate: datasource=github-releases depName=jsonresume/resume-cli
-ENV RESUMECLI_VERSION=v3.0.6
+ENV RESUMECLI_VERSION=v3.0.7
 
 RUN npm install resume-cli@${RESUMECLI_VERSION##v} jsonresume-theme-macchiato
 # And then we just run Resume CLI
