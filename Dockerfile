@@ -1,7 +1,7 @@
 # This is a multi-stage Dockerfile 
 
 ########################################################## Stage 1
-FROM alpine:3.16.0 AS resume-stage
+FROM alpine:3.16.1 AS resume-stage
 WORKDIR /resume 
 COPY ./resume.json .
 RUN apk add npm git
@@ -16,7 +16,7 @@ RUN npx resume export /resume/index.html --format html --theme macchiato
 
 
 ########################################################## Stage 2
-FROM alpine:3.16.0 AS hugo-stage
+FROM alpine:3.16.1 AS hugo-stage
 
 # renovate: datasource=github-releases depName=gohugoio/hugo
 ENV HUGO_VERSION=v0.101.0
