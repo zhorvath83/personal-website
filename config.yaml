@@ -10,7 +10,6 @@ pygmentsUseClasses: true
 rssLimit: 10
 copyright: ''
 enableEmoji: true
-disableKinds: RSS
 author:
   name: Horváth Zoltán
 blackfriday: {}
@@ -45,7 +44,7 @@ params:
     - name: stackshare
       url: 'https://stackshare.io/zhorvath83/my-stack'
     - name: email
-      url: 'mailto:mail@horvathzoltan.me'
+      url: 'mailto:contact@horvathzoltan.me'
 menu:
   main:
     - name: Resume
