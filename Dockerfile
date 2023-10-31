@@ -19,7 +19,7 @@ RUN npx resume export /resume/index.html --format html --theme macchiato
 FROM alpine:3.18.4 AS hugo-stage
 
 # renovate: datasource=github-releases depName=gohugoio/hugo
-ENV HUGO_VERSION=v0.120.1
+ENV HUGO_VERSION=v0.120.2
 
 RUN apk add tar curl
 RUN echo "Installing hugo version '${HUGO_VERSION##v}' ..." && \
