@@ -47,9 +47,9 @@ params:
       url: 'mailto:contact@horvathzoltan.me'
 menu:
   main:
-    - name: Resume
-      url: resume/
-      weight: 10
+    # - name: Resume
+    #   url: resume/
+    #   weight: 10
     - name: Login
       url: 'https://dash.horvathzoltan.me'
       weight: 20
