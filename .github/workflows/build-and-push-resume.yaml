@@ -3,7 +3,7 @@ name: Build and push resume
 on:
   push:
     paths:
-      - 'resume.json'
+      - 'resume/resume.json'
   workflow_dispatch:
 
 jobs:
