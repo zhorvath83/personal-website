@@ -25,10 +25,10 @@
 	},
 	"work": [
 		{
-			"company": "Aegon Magyarország Általános Biztosító Zrt.",
+			"company": "Alfa Vienna Insurance Group Biztosító Zrt.",
 			"position": "System Analyst",
 			"startDate": "2021-04-01",
-			"endDate": "",
+			"endDate": "2023-12-31",
 			"highlights": [
 				"Designing of system processes and interfaces",
 				"Preparation of IT documentation related to emerging business needs",
@@ -37,7 +37,7 @@
 				"Performing L3 level support tasks"
 			],
 			"summary": "",
-			"url": "https://www.aegon.hu"
+			"url": "https://www.alfa.hu"
 		},
 		{
 			"company": "Techron Kft.",
@@ -51,7 +51,7 @@
 				"Banking core system frontend development"
 			],
 			"summary": "",
-			"url": "https://techron.hu"
+			"url": ""
 		},
 		{
 			"company": "Techron Kft.",
@@ -65,7 +65,7 @@
 				"Performing product owner tasks in connection with development support and ticketing systems"
 			],
 			"summary": "",
-			"url": "https://techron.hu"
+			"url": ""
 		},
 		{
 			"company": "Bank Assistance Zrt.",
