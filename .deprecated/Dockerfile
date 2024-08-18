@@ -35,7 +35,7 @@ RUN /usr/local/bin/hugo --minify
 
 
 ########################################################## Stage 3
-FROM nginxinc/nginx-unprivileged:1.27.0-alpine AS final-stage
+FROM nginxinc/nginx-unprivileged:1.27.1-alpine AS final-stage
 USER root
 RUN apk update && apk add --upgrade apk-tools && apk upgrade --available
 WORKDIR /usr/share/nginx/html/
