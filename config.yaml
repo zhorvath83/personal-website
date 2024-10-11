@@ -16,7 +16,6 @@ blackfriday: {}
 # do not create any taxonomies
 disableKinds:
   - section
-  - taxonomyTerm
   - taxonomy
   - sitemap
   - robotsTXT
