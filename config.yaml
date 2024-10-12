@@ -49,8 +49,6 @@ params:
       - name: Resume
         url: "/resume"
 
-
-
   socialIcons:
     - name: linkedin
       url: 'https://www.linkedin.com/in/zhorvath83'
