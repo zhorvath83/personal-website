@@ -1,0 +1,62 @@
+# HUGO configuration
+baseURL: 'https://horvathzoltan.me/'
+languageCode: en
+defaultContentLanguage: en
+title: "Horváth Zoltán"
+copyright: "© 2024 Horváth Zoltán [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0)"
+
+enableRobotsTXT: true
+enableEmoji: true
+pygmentsUseClasses: true
+
+minify:
+  disableXML: true
+  minifyOutput: true
+
+menu:
+  main:
+    - name: Login
+      url: "https://dash.horvathzoltan.me/"
+      weight: 5
+    - name: Resume
+      url: "/resume"
+      weight: 10
+
+theme: PaperMod
+params:
+  env: production
+  defaultTheme: light
+  disableThemeToggle: true
+  assets:
+    favicon: "/img/favicon.ico"
+    favicon16x16: "/img/favicon-16x16.png"
+    favicon32x32: "/img/favicon-32x32.png"
+    apple_touch_icon: "/img/favicon-apple-touch-icon.png"
+  label:
+    icon: "/img/HZ_logo.png"
+  profileMode:
+    enabled: true
+    title: "Horváth Zoltán"
+    subtitle: "Solution Architect  |  Apple Certified Support Professional"
+    # subtitle: "Hi there! \U0001F44B </br> Welcome to my website."
+    imageUrl: "/img/HZ_circular_avatar_bw.png"
+    imageTitle: "Horváth Zoltán"
+    imageWidth: 180
+    imageHeight: 180
+    buttons:
+      - name: Login
+        url: "https://dash.horvathzoltan.me/"
+      - name: Resume
+        url: "/resume"
+
+
+
+  socialIcons:
+    - name: linkedin
+      url: 'https://www.linkedin.com/in/zhorvath83'
+    - name: github
+      url: 'https://github.com/zhorvath83'
+    - name: stackshare
+      url: 'https://stackshare.io/zhorvath83/my-stack'
+    - name: email
+      url: 'mailto:contact@horvathzoltan.me'
