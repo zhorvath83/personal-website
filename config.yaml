@@ -29,7 +29,15 @@ menu:
       url: "https://dash.horvathzoltan.me/"
       weight: 15
 
-theme: ["PaperMod", "hugo-notice"]
+theme:
+  - PaperMod
+  - hugo-notice
+
+module:
+  imports:
+    - path: github.com/adityatelange/hugo-PaperMod
+    - path: github.com/your-cv-theme-repo
+
 params:
   env: production
   defaultTheme: light
