@@ -7,6 +7,7 @@ copyright: "© 2024 Horváth Zoltán [CC BY-NC 4.0](https://creativecommons.org/
 
 enableRobotsTXT: true
 enableEmoji: true
+
 pygmentsUseClasses: true
 
 minify:
@@ -15,25 +16,39 @@ minify:
 
 menu:
   main:
-    - name: Login
-      url: "https://dash.horvathzoltan.me/"
+    - identifier: about
+      name: About Me
+      url: "/about/"
       weight: 5
-    - name: Resume
-      url: "/resume"
-      weight: 10
+    # - identifier: resume
+    #   name: Resume
+    #   url: "/resume"
+    #   weight: 10
+    - identifier: cloud
+      name: Private cloud
+      url: "https://dash.horvathzoltan.me/"
+      weight: 15
 
-theme: PaperMod
+theme: ["PaperMod", "hugo-notice"]
 params:
   env: production
   defaultTheme: light
   disableThemeToggle: true
+  ShowCodeCopyButtons: true
+  DateFormat: "2006-01-02"
+  # ShowReadingTime: true
+  # ShowBreadCrumbs: true
+  # author: "Horváth Zoltán"
+
   assets:
     favicon: "/img/favicon.ico"
     favicon16x16: "/img/favicon-16x16.png"
     favicon32x32: "/img/favicon-32x32.png"
     apple_touch_icon: "/img/favicon-apple-touch-icon.png"
+
   label:
     icon: "/img/HZ_logo.png"
+
   profileMode:
     enabled: true
     title: "Horváth Zoltán"
@@ -44,17 +59,28 @@ params:
     imageWidth: 180
     imageHeight: 180
     buttons:
-      - name: Login
+      - identifier: about
+        name: About Me
+        url: "/about"
+      # - identifier: resume
+      #   name: Resume
+      #   url: "/resume"
+      - identifier: cloud
+        name: Private cloud
         url: "https://dash.horvathzoltan.me/"
-      - name: Resume
-        url: "/resume"
 
   socialIcons:
+    # - name: CV
+    #   url: "/resume.pdf"
     - name: linkedin
+      title: LinkedIn
       url: 'https://www.linkedin.com/in/zhorvath83'
     - name: github
+      title: GitHub
       url: 'https://github.com/zhorvath83'
-    - name: stackshare
+    - name: codepen
+      title: My tech stack
       url: 'https://stackshare.io/zhorvath83/my-stack'
     - name: email
+      title: Mail me
       url: 'mailto:contact@horvathzoltan.me'
