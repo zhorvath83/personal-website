@@ -5,7 +5,7 @@ draft: false
 ---
 
 {{< notice info >}}
-My name is Horváth Zoltán, and I’m a Solution Architect from Hungary, based in Budapest.
+My name is Zoltán Horváth, and I’m a Solution Architect from Hungary, based in Budapest.
 
 I have been working in the IT industry for nearly 20 years, with a strong focus on designing and implementing scalable, secure, and efficient solutions for enterprise environments.
 
