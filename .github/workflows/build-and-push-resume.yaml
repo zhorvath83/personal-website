@@ -27,8 +27,8 @@ jobs:
         name: Export resume as HTML
         with:
           theme: macchiato
-          resume_filepath: content/resume/resume.json
-          output_filepath: content/resume/index.html
+          resume_filepath: static/resume/resume.json
+          output_filepath: static/resume/index.html
 
       # - uses: Devleaps/jsonresume-generator@v1
       #   id: jsonresume-generator
