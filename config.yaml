@@ -86,6 +86,7 @@ params:
         name: Private cloud
         url: "https://dash.horvathzoltan.me/"
 
+  social: true
   socialIcons:
     # - name: CV
     #   url: "/resume.pdf"
