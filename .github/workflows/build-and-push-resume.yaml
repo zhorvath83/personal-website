@@ -3,7 +3,7 @@ name: Build and push resume
 on:
   push:
     paths:
-      - 'content/resume/resume.json'
+      - 'resume/resume.json'
   workflow_dispatch:
 
 jobs:
@@ -39,14 +39,14 @@ jobs:
         with:
           action: render
           file: resume.json
-          folder: content/resume/
+          folder: resume/
           output-type: html
           theme-local: false
           theme-name: jsonresume-theme-reactive
 
       - name: Rename resume.html to index.html
         run: |
-          mv -f content/resume/resume.html content/resume/index.html
+          mv -f resume/resume.html static/resume/index.html
 
       - name: Commit published HTML
         id: commit
