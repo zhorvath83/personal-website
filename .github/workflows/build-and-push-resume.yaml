@@ -30,9 +30,9 @@ jobs:
       #     resume_filepath: content/resume/resume.json
       #     output_filepath: content/resume/index.html
 
-      - name: Delete old resume.html
-        run: |
-          rm content/resume/index.html
+      # - name: Delete old resume.html
+      #   run: |
+      #     rm content/resume/index.html
 
       - uses: Devleaps/jsonresume-generator@v1
         id: jsonresume-generator
@@ -44,10 +44,9 @@ jobs:
           theme-local: false
           theme-name: jsonresume-theme-reactive
 
-      # - name: Move resume.html to content/resume/index.html
-      #   run: |
-      #     mkdir -p content/resume
-      #     mv resume/resume.html content/resume/index.html
+      - name: Rename resume.html to index.html
+        run: |
+          mv -f content/resume/resume.html content/resume/index.html
 
       - name: Commit published HTML
         id: commit

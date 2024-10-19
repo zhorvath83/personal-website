@@ -1,8 +1,30 @@
 {
+	"meta": {
+		"theme": "jsonresume-theme-reactive",
+		"themeOptions": {
+			"colors": {
+			  "primary": "#666666",
+			  "secondary": "#333333"
+			},
+			"i18n": {
+				"sections.awards": "Awards",
+				"sections.education": "Education",
+				"sections.interests": "Interests",
+				"sections.languages": "Languages",
+				"sections.projects": "Projects",
+				"sections.publications": "Publications",
+				"sections.references": "References",
+				"sections.skills": "Skills",
+				"sections.volunteer": "Volunteer",
+				"sections.work": "Work",
+				"timeRange.openEnd": "Present"
+			  }
+		}
+	},
 	"basics": {
 		"name": "Zoltán Horváth",
 		"label": "System Analyst at Aegon Magyarország Zrt.",
-		"picture": "https://horvathzoltan.me/img/HZ_rectangle_avatar.jpg",
+		"image": "https://horvathzoltan.me/img/HZ_rectangle_avatar.jpg",
 		"email": "contact @ horvathzoltan.me",
 		"phone": "+36 (30) 946 1662",
 		"url": "https://horvathzoltan.me",
