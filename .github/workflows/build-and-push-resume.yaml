@@ -23,22 +23,22 @@ jobs:
       #     PROJECT_OWNER_PHONE:  ${{ secrets.PROJECT_OWNER_PHONE }}
       #     ROOT_DOMAIN: ${{ secrets.ROOT_DOMAIN }}
 
-      - uses: kelvintaywl/action-jsonresume-export@v1
-        name: Export resume as HTML
-        with:
-          theme: even #macchiato
-          resume_filepath: content/resume/resume.json
-          output_filepath: content/resume/index.html
-
-      # - uses: Devleaps/jsonresume-generator@v1
-      #   id: jsonresume-generator
+      # - uses: kelvintaywl/action-jsonresume-export@v1
+      #   name: Export resume as HTML
       #   with:
-      #     action: render
-      #     file: resume.json
-      #     folder: resume/
-      #     output-type: html
-      #     theme-local: false
-      #     theme-name: macchiato
+      #     theme: reactive #macchiato
+      #     resume_filepath: content/resume/resume.json
+      #     output_filepath: content/resume/index.html
+
+      - uses: Devleaps/jsonresume-generator@v1
+        id: jsonresume-generator
+        with:
+          action: render
+          file: resume.json
+          folder: content/resume/
+          output-type: html
+          theme-local: false
+          theme-name: reactive
 
       # - name: Move resume.html to content/resume/index.html
       #   run: |
