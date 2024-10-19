@@ -53,9 +53,9 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          if [ -n "$(git status --porcelain content/resume/index.html)" ]; then
-            git add content/resume/index.html
-            git commit -m "chore(content/resume/index.html): update resume page"
+          if [ -n "$(git status --porcelain static/resume/index.html)" ]; then
+            git add static/resume/index.html
+            git commit -m "chore(static/resume/index.html): update resume page"
             echo "exit_code=0" >> $GITHUB_OUTPUT
           else
             echo "exit_code=1" >> $GITHUB_OUTPUT
