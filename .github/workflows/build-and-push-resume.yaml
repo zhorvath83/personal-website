@@ -30,6 +30,10 @@ jobs:
       #     resume_filepath: content/resume/resume.json
       #     output_filepath: content/resume/index.html
 
+      - name: Delete old resume.html
+        run: |
+          rm content/resume/index.html
+
       - uses: Devleaps/jsonresume-generator@v1
         id: jsonresume-generator
         with:
@@ -53,9 +57,9 @@ jobs:
           if [ -n "$(git status --porcelain content/resume/index.html)" ]; then
             git add content/resume/index.html
             git commit -m "chore(content/resume/index.html): update resume page"
-            echo ::set-output name=exit_code::0
+            echo "exit_code=0" >> $GITHUB_OUTPUT
           else
-            echo ::set-output name=exit_code::1
+            echo "exit_code=1" >> $GITHUB_OUTPUT
           fi
 
       - name: Push changes
