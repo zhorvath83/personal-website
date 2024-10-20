@@ -64,14 +64,14 @@ params:
     apple_touch_icon: "/img/favicon-apple-touch-icon.png"
 
   label:
-    icon: "/img/HZ_logo.png"
+    icon: "/img/HZ_letter_logo.png"
 
   profileMode:
     enabled: true
     title: "Horváth Zoltán"
     subtitle: "Solution Architect  |  Apple Certified Support Professional"
     # subtitle: "Hi there! \U0001F44B </br> Welcome to my website."
-    imageUrl: "/img/HZ_circular_avatar_bw.png"
+    imageUrl: "/img/HZ_avatar_bw_square.jpeg"
     imageTitle: "Horváth Zoltán"
     imageWidth: 200
     imageHeight: 200
