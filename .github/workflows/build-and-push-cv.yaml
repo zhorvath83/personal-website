@@ -1,4 +1,4 @@
-name: Build and push resume 
+name: Build and push CV 
  
 on:
   push:
@@ -23,17 +23,6 @@ jobs:
       #     PROJECT_OWNER_PHONE:  ${{ secrets.PROJECT_OWNER_PHONE }}
       #     ROOT_DOMAIN: ${{ secrets.ROOT_DOMAIN }}
 
-      # - uses: kelvintaywl/action-jsonresume-export@v1
-      #   name: Export resume as HTML
-      #   with:
-      #     theme: reactive #macchiato
-      #     resume_filepath: content/resume/resume.json
-      #     output_filepath: content/resume/index.html
-
-      # - name: Delete old resume.html
-      #   run: |
-      #     rm content/resume/index.html
-
       - uses: Devleaps/jsonresume-generator@v1
         id: jsonresume-generator
         with:
@@ -44,18 +33,34 @@ jobs:
           theme-local: false
           theme-name: jsonresume-theme-reactive
 
-      - name: Rename resume.html to index.html
+      - name: Moving resume.html
         run: |
-          mv -f resume/resume.html static/resume/index.html
+          mkdir -p static/cv
+          mv -f resume/resume.html static/cv/index.html
 
-      - name: Commit published HTML
+      - uses: Devleaps/jsonresume-generator@v1
+        id: jsonresume-generator
+        with:
+          action: render
+          file: resume.json
+          folder: resume/
+          output-type: pdf
+          theme-local: false
+          theme-name: jsonresume-theme-reactive
+
+      - name: Moving resume.pdf
+        run: |
+          mkdir -p static/cv
+          mv -f resume/resume.pdf static/cv/Zoltan_Horvath_CV.pdf
+
+      - name: Commit published resume files
         id: commit
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          if [ -n "$(git status --porcelain static/resume/index.html)" ]; then
-            git add static/resume/index.html
-            git commit -m "chore(static/resume/index.html): update resume page"
+          if [ -n "$(git status --porcelain static/cv/)" ]; then
+            git add static/cv/
+            git commit -m "chore(static/cv): update CV files"
             echo "exit_code=0" >> $GITHUB_OUTPUT
           else
             echo "exit_code=1" >> $GITHUB_OUTPUT

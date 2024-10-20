@@ -73,15 +73,15 @@ params:
     # subtitle: "Hi there! \U0001F44B </br> Welcome to my website."
     imageUrl: "/img/HZ_circular_avatar_bw.png"
     imageTitle: "Horváth Zoltán"
-    imageWidth: 180
-    imageHeight: 180
+    imageWidth: 200
+    imageHeight: 200
     buttons:
       - identifier: about
         name: About Me
         url: "/about"
-      # - identifier: resume
-      #   name: Resume
-      #   url: "/resume"
+      - identifier: resume
+        name: Resume
+        url: "/resume"
       - identifier: cloud
         name: Private cloud
         url: "https://dash.horvathzoltan.me/"
