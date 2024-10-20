@@ -88,8 +88,8 @@ params:
 
   social: true
   socialIcons:
-    - name: CV
-      url: "/cv/Zoltan_Horvath_en_CV.pdf"
+    # - name: CV
+    #   url: "/cv/Zoltan_Horvath_en_CV.pdf"
     - name: linkedin
       title: LinkedIn
       url: 'https://www.linkedin.com/in/zhorvath83'
