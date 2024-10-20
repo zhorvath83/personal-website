@@ -26,10 +26,10 @@ menu:
       name: About Me
       url: "/about/"
       weight: 5
-    # - identifier: resume
-    #   name: Resume
-    #   url: "/resume"
-    #   weight: 10
+    - identifier: cv
+      name: CV
+      url: "/cv"
+      weight: 10
     - identifier: cloud
       name: Private cloud
       url: "https://dash.horvathzoltan.me/"
@@ -88,8 +88,8 @@ params:
 
   social: true
   socialIcons:
-    # - name: CV
-    #   url: "/resume.pdf"
+    - name: CV
+      url: "/cv/Zoltan_Horvath_CV.pdf"
     - name: linkedin
       title: LinkedIn
       url: 'https://www.linkedin.com/in/zhorvath83'
