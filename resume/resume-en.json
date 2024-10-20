@@ -1,0 +1,244 @@
+{
+	"meta": {
+		"theme": "jsonresume-theme-reactive",
+		"themeOptions": {
+			"colors": {
+				"primary": "#666666",
+				"secondary": "#8B1149"
+			},
+			"i18n": {
+				"sections.awards": "Awards",
+				"sections.education": "Education",
+				"sections.interests": "Interests",
+				"sections.languages": "Languages",
+				"sections.projects": "Projects",
+				"sections.publications": "Publications",
+				"sections.references": "References",
+				"sections.skills": "Skills",
+				"sections.volunteer": "Volunteer",
+				"sections.work": "Work",
+				"timeRange.openEnd": "Present"
+			}
+		}
+	},
+	"basics": {
+		"name": "Zoltán Horváth",
+		"label": "Solution Architect at iKON Informatika Zrt.",
+		"image": "https://horvathzoltan.me/img/HZ_avatar_coloured_circular.png",
+		"email": "contact@horvathzoltan.me",
+		"phone": "+36 (30) 946 1662",
+		"url": "https://horvathzoltan.me",
+		"summary": "I am Zoltán Horváth, a seasoned Solution Architect from Budapest, Hungary, with nearly 20 years of experience in the IT industry. I specialize in designing and implementing scalable, secure, and efficient solutions for large enterprises. My expertise covers Mobile Device Management (iOS, macOS), CI/CD pipelines, microservices architecture, enterprise infrastructure integration, and the development of core banking and instant payment systems. Passionate about continuously evolving my skills, I thrive on exploring new technologies and optimizing existing solutions to meet the demands of modern IT environments.",
+		"location": {
+			"countryCode": "HU",
+			"city": "Budapest"
+		},
+		"profiles": [{
+				"network": "LinkedIn",
+				"username": "zhorvath83",
+				"url": "https://linkedin.com/in/zhorvath83"
+			},
+			{
+				"network": "GitHub",
+				"username": "zhorvath83",
+				"url": "https://github.com/zhorvath83"
+			}
+		]
+	},
+	"work": [
+		{
+			"name": "iKON Informatika Zrt.",
+			"position": "Solution Architect",
+			"startDate": "2023-11-01",
+			"summary": "Responsible for integrating and managing Apple device infrastructure within multinational and financial institutions. Focused on MDM system implementation, security compliance, seamless device integration into corporate infrastructures.",
+			"highlights": [
+				"Established centralized Apple device management in multinational environments and financial institutions",
+				"Implemented Mobile Device Management (MDM) systems, integrated Identity Provider (IdP) solutions, and maintained client-side security stack components",
+				"Developed automated device enrollment workflows and device compliance policies adhering to CIS and NIST guidelines",
+				"Integrated Apple devices with enterprise infrastructure, including Active Directory, Proxy, VPN, WiFi, etc.",
+				"Analyzed, restructured, and migrated CI/CD pipelines for corporate customers, ensuring alignment with client requirements and industry best practices, including related integrations",
+				"Developed and tested Mobile Device Management support software to enhance user experience and ensure device compliance for macOS devices, including the implementation of CI/CD pipelines, static and dynamic application security testing (SAST/DAST), software notarization, and release management"
+			],
+			"url": "https://ikoninformatika.hu"
+		},
+		{
+			"name": "Alfa Vienna Insurance Group Biztosító Zrt.",
+			"position": "System Analyst",
+			"startDate": "2021-04-01",
+			"endDate": "2023-12-31",
+			"summary": "Handled the design and optimization of system processes, ensuring efficient and scalable solutions in line with business needs. Managed advanced support while coordinating development and testing tasks.",
+			"highlights": [
+				"Designed and optimized system processes and interfaces related to core system",
+				"Authored comprehensive IT documentation for emerging business needs",
+				"Modeled IT solutions using Enterprise Architect",
+				"Coordinated development and testing tasks for successful implementations",
+				"Provided L3-level support for complex technical issues"
+			],
+			"url": "https://www.alfa.hu"
+		},
+		{
+			"name": "Techron Kft.",
+			"position": "Software Developer",
+			"startDate": "2019-09-01",
+			"endDate": "2021-03-31",
+			"summary": "Contributed to the development of a high-availability instant payment system using a DevOps approach, taking on a dual role as developer and product owner in key financial projects.",
+			"highlights": [
+				"Developed a high-availability Instant Payment System (AFR) with a DevOps and GitOps approach, leveraging Infrastructure as Code",
+				"Acted as a product owner for the AFR project, ensuring stakeholder alignment",
+				"Built synchronous and asynchronous interfaces for core banking, netbank, and card management systems",
+				"Developed core banking application"
+			],
+			"url": ""
+		},
+		{
+			"name": "Techron Kft.",
+			"position": "Information Technology Expert",
+			"startDate": "2015-05-01",
+			"endDate": "2019-08-31",
+			"summary": "Oversaw the design, testing, and specification of financial institution software systems, playing a critical role in developing and maintaining key interfaces and internal systems.",
+			"highlights": [
+				"Designed, specified, and tested processes for financial institution software systems",
+				"Developed interface definitions (GIRO, internet banking, Open API, authority requests)",
+				"Provided support, key user training, and ensured high-quality service delivery",
+				"Managed development support and ticketing systems as product owner"
+			],
+			"url": ""
+		},
+		{
+			"name": "Bank Assistance Zrt.",
+			"position": "Information Technology Expert",
+			"startDate": "2012-07-01",
+			"endDate": "2015-04-30",
+			"summary": "Performed comprehensive IT consulting and testing services for financial institutions, ensuring the seamless integration of new developments.",
+			"highlights": [
+				"Performed comprehensive module, and system-level testing",
+				"Created and maintained user, API, and testing documentation",
+				"Provided consulting services to financial institutions"
+			],
+			"url": ""
+		},
+		{
+			"name": "Forrás Takarékszövetkezet",
+			"position": "Information Technology Manager",
+			"startDate": "2010-11-01",
+			"endDate": "2012-06-30",
+			"summary": "Managed IT operations and security for the institution, overseeing software development initiatives and ensuring regulatory compliance during audits.",
+			"highlights": [
+				"Assessed development needs and drafted business system plans",
+				"Performed functional testing for financial institution software",
+				"Maintained IT regulations and represented the institution during audits",
+				"Management and supervision at the field of operation and information security"
+			],
+			"url": ""
+		},
+		{
+			"name": "Forrás Takarékszövetkezet",
+			"position": "System Administrator",
+			"startDate": "2005-03-01",
+			"endDate": "2010-10-31",
+			"summary": "Handled core banking operations, performed rigorous software testing, and addressed customer support requests.",
+			"highlights": [
+				"Handled operational tasks in core banking systems",
+				"Tested new software versions and communicated development needs",
+				"Performed helpdesk tasks and fulfilled electronic service requests"
+			]
+		}
+	],
+	"education": [{
+			"institution": "Kodolányi János University",
+			"area": "Economics",
+			"studyType": "Bachelor's degree",
+			"startDate": "2002-12-31",
+			"endDate": "2006-12-31"
+		},
+		{
+			"institution": "Ipari Szakközépiskola és Gimnázium",
+			"area": "Economic Informatics",
+			"studyType": "OKJ 52464102",
+			"startDate": "2002-12-31",
+			"endDate": "2002-12-31"
+		},
+		{
+			"institution": "Ipari Szakközépiskola és Gimnázium",
+			"area": "Informatics",
+			"studyType": "Vocational high school of informatics",
+			"startDate": "1998-12-31",
+			"endDate": "2001-12-31"
+		}
+	],
+	"certificates": [{
+		"name": "Apple Certified Support Professional",
+		"date": "2024-02-14",
+		"issuer": "Apple",
+		"url": "https://www.credly.com/badges/44a3452d-7831-4c7a-947c-4c291ea819dc/public_url"
+	  }],
+	"skills": [
+		{
+			"name": "Enterprise Architecture",
+			"keywords": [
+				"Microservices",
+				"High availability systems",
+				"System design and integration",
+				"Identity Provider (IdP) Integration"
+			]
+		},
+		{
+			"name": "Infrastructure Automation",
+			"keywords": [
+				"Infrastructure as Code (IaC)",
+				"Container orchestration (Kubernetes, Docker)",
+				"CI/CD pipelines",
+				"Terraform",
+				"Ansible"
+			]
+		},
+		{
+			"name": "Apple Device Integration",
+			"keywords": [
+				"macOS, iOS, iPadOS",
+				"Device security and compliance",
+				"MDM System Integration",
+				"Automated Device Enrollment"
+			]
+		},
+		{
+			"name": "Financial Systems Development",
+			"keywords": [
+				"Core banking systems",
+				"Instant payment systems (AFR)",
+				"GIRO integration",
+				"Netbanking integration",
+				"Insurance core systems",
+				"Web-based client service systems"
+			]
+		},
+		{
+			"name": "Security and Compliance",
+			"keywords": [
+				"Enterprise-level security",
+				"Operational risk management",
+				"Compliance with CIS and NIST standards",
+				"Device compliance policies"
+			]
+		}
+	],
+	"languages": [{
+			"language": "Hungarian",
+			"fluency": "Native speaker"
+		},
+		{
+			"language": "English",
+			"fluency": "Intermediate"
+		}
+	],
+	"interests": [{
+		"name": "Hobbies",
+		"keywords": [
+			"IaC - Infrastructure as Code",
+			"Kubernetes",
+			"macOS",
+			"Hiking",
+			"Cycling"
+		]
+	}]
+}

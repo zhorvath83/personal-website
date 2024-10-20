@@ -4,7 +4,7 @@ This repository contains the source code for my personal website, which includes
 
 ## Resume Generation
 
-The resume included on this website is automatically generated (by HitHub workflow) from a JSON file (`resume.json`) using a GitHub Action.
+The resume included on this website is automatically generated (by HitHub workflow) from a JSON file (`resume-en.json`) using a GitHub Action.
 
 ## Deployment
 
