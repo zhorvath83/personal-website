@@ -35,7 +35,7 @@ jobs:
 
       - name: Modify resume.html
         run: |
-          sed -i '/<head>/a <link rel=icon href=https://horvathzoltan.me/img/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://horvathzoltan.me/img/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://horvathzoltan.me/img/favicon-32x32.png><link rel=apple-touch-icon href=https://horvathzoltan.me/img/favicon-apple-touch-icon.png><link rel=mask-icon href=https://horvathzoltan.me/safari-pinned-tab.svg>' resume/resume.html
+          sed -i 's|<link rel="icon"[^>]*>|<link rel=icon href=https://horvathzoltan.me/img/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://horvathzoltan.me/img/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://horvathzoltan.me/img/favicon-32x32.png><link rel=apple-touch-icon href=https://horvathzoltan.me/img/favicon-apple-touch-icon.png><link rel=mask-icon href=https://horvathzoltan.me/safari-pinned-tab.svg>|' resume/resume.html
           sed -i 's/<title>CV - Zoltán Horváth<\/title>/<title>HorvathZoltan.me - CV<\/title>/' resume/resume.html
 
       - name: Moving resume.html

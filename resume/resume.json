@@ -23,15 +23,15 @@
 	},
 	"basics": {
 		"name": "Zoltán Horváth",
-		"label": "System Analyst at Aegon Magyarország Zrt.",
+		"label": "Solution Architect at iKON Informatika Zrt.",
 		"image": "https://horvathzoltan.me/img/HZ_avatar_coloured_circular.png",
 		"email": "contact@horvathzoltan.me",
 		"phone": "+36 (30) 946 1662",
 		"url": "https://horvathzoltan.me",
-		"summary": "",
+		"summary":  "My name is Zoltán Horváth, and I'm a Solution Architect from Hungary, based in Budapest. I have been working in the IT industry for nearly 20 years, with a strong focus on designing and implementing scalable, secure, and efficient solutions for enterprise environments. My expertise spans multiple areas including Mobile Device Management (iOS, macOS), CI/CD pipelines, microservices architecture, enterprise infrastructure integration, core banking and instant payment (AFR) software development. In addition to my professional background, I am always keen on exploring new technologies and improving existing systems to meet modern challenges in IT.",
 		"location": {
 			"countryCode": "HU",
-			"address": "Budapest"
+			"city": "Budapest"
 		},
 		"profiles": [{
 				"network": "LinkedIn",
@@ -47,7 +47,7 @@
 	},
 	"work": [
 		{
-			"company": "Alfa Vienna Insurance Group Biztosító Zrt.",
+			"name": "Alfa Vienna Insurance Group Biztosító Zrt.",
 			"position": "System Analyst",
 			"startDate": "2021-04-01",
 			"endDate": "2023-12-31",
@@ -62,7 +62,7 @@
 			"url": "https://www.alfa.hu"
 		},
 		{
-			"company": "Techron Kft.",
+			"name": "Techron Kft.",
 			"position": "Software Developer",
 			"startDate": "2019-09-01",
 			"endDate": "2021-03-31",
@@ -76,7 +76,7 @@
 			"url": ""
 		},
 		{
-			"company": "Techron Kft.",
+			"name": "Techron Kft.",
 			"position": "Information Technology Expert",
 			"startDate": "2015-05-01",
 			"endDate": "2019-08-31",
@@ -90,7 +90,7 @@
 			"url": ""
 		},
 		{
-			"company": "Bank Assistance Zrt.",
+			"name": "Bank Assistance Zrt.",
 			"position": "Information Technology Expert",
 			"startDate": "2012-07-01",
 			"endDate": "2015-04-30",
@@ -103,7 +103,7 @@
 			"url": ""
 		},
 		{
-			"company": "Forrás Takarékszövetkezet",
+			"name": "Forrás Takarékszövetkezet",
 			"position": "Information Technology Manager",
 			"startDate": "2010-11-01",
 			"endDate": "2012-06-30",
@@ -117,7 +117,7 @@
 			"url": ""
 		},
 		{
-			"company": "Forrás Takarékszövetkezet",
+			"name": "Forrás Takarékszövetkezet",
 			"position": "System Administrator",
 			"startDate": "2005-03-01",
 			"endDate": "2010-10-31",
@@ -151,10 +151,16 @@
 			"endDate": "2001-12-31"
 		}
 	],
+	"certificates": [{
+		"name": "Apple Certified Support Professional",
+		"date": "2024-02-14",
+		"issuer": "Apple",
+		"url": "https://www.credly.com/badges/44a3452d-7831-4c7a-947c-4c291ea819dc/public_url"
+	  }],
 	"skills": [{
 			"name": "Software Development",
 			"level": "",
-			"keywords": ["Magic XPA", "UniPaas", "Lua"]
+			"keywords": ["Julia", "Magic XPA", "UniPaas", "Lua"]
 		},
 		{
 			"name": "Data Structures",
@@ -164,7 +170,7 @@
 		{
 			"name": "Information Technology",
 			"level": "",
-			"keywords": ["Debian", "Windows", "Docker", "Tarantool", "Ceph", "Consul"]
+			"keywords": ["macOS", "Debian", "Windows", "Docker", "Tarantool", "Ceph", "Consul"]
 		},
 		{
 			"name": "Integration",
@@ -179,7 +185,7 @@
 		{
 			"name": "Middleware and Integration Software",
 			"level": "",
-			"keywords": ["REST API", "JSON API", "OpenAPI specification (Swagger)", "Postman"]
+			"keywords": ["REST API", "JSON API", "OpenAPI", "Postman"]
 		}
 	],
 	"languages": [{
