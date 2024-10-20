@@ -79,9 +79,9 @@ params:
       - identifier: about
         name: About Me
         url: "/about"
-      - identifier: resume
-        name: Resume
-        url: "/resume"
+      - identifier: cv
+        name: CV
+        url: "/cv"
       - identifier: cloud
         name: Private cloud
         url: "https://dash.horvathzoltan.me/"

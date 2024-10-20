@@ -24,7 +24,7 @@ jobs:
       #     ROOT_DOMAIN: ${{ secrets.ROOT_DOMAIN }}
 
       - uses: Devleaps/jsonresume-generator@v1
-        id: jsonresume-generator
+        id: jsonresume-html-generator
         with:
           action: render
           file: resume.json
@@ -39,7 +39,7 @@ jobs:
           mv -f resume/resume.html static/cv/index.html
 
       - uses: Devleaps/jsonresume-generator@v1
-        id: jsonresume-generator
+        id: jsonresume-pdf-generator
         with:
           action: render
           file: resume.json
