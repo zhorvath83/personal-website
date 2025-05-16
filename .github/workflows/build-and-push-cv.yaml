@@ -24,58 +24,14 @@ jobs:
 
       - name: Modify resume-en.html
         run: |
-          # Ensure we have write permissions to the file
-          chmod +w resume/resume-en.html
+          # 1. Cseréld a title-t
+          sed -i 's/<title>CV - Zoltán Horváth<\/title>/<title>CV | HorvathZoltan.me<\/title>/' resume/resume-en.html
           
-          # Install BeautifulSoup
-          python -m pip install beautifulsoup4
+          # 2. Töröli a régi favicon-t
+          sed -i '/<link rel="icon" type="image\/svg+xml"/d' resume/resume-en.html
           
-          python - << 'EOL'
-          from bs4 import BeautifulSoup
-          
-          # Open and parse the HTML file
-          with open('resume/resume-en.html', 'r', encoding='utf-8') as file:
-              soup = BeautifulSoup(file, 'html.parser')
-          
-          # Change the title
-          title_tag = soup.find('title')
-          if title_tag:
-              title_tag.string = 'CV | HorvathZoltan.me'
-          
-          # Remove the existing favicon link(s)
-          for link in soup.find_all('link', rel='icon'):
-              link.decompose()
-          
-          # Create the new favicon links
-          favicon_links = [
-              {'rel': 'icon', 'href': 'https://horvathzoltan.me/img/favicon.ico'},
-              {'rel': 'icon', 'type': 'image/png', 'sizes': '16x16', 'href': 'https://horvathzoltan.me/img/favicon-16x16.png'},
-              {'rel': 'icon', 'type': 'image/png', 'sizes': '32x32', 'href': 'https://horvathzoltan.me/img/favicon-32x32.png'},
-              {'rel': 'apple-touch-icon', 'href': 'https://horvathzoltan.me/img/favicon-apple-touch-icon.png'},
-              {'rel': 'mask-icon', 'href': 'https://horvathzoltan.me/safari-pinned-tab.svg'}
-          ]
-          
-          # Find the meta description tag to insert after
-          meta_desc = soup.find('meta', attrs={'name': 'description'})
-          
-          # Add the new favicon links
-          for attributes in reversed(favicon_links):
-              new_link = soup.new_tag('link')
-              for attr_name, attr_value in attributes.items():
-                  new_link[attr_name] = attr_value
-              
-              # Insert after the meta description or at the beginning of the head
-              if meta_desc:
-                  meta_desc.insert_after(new_link)
-              else:
-                  head = soup.find('head')
-                  if head:
-                      head.append(new_link)
-          
-          # Save the modified HTML
-          with open('resume/resume-en.html', 'w', encoding='utf-8') as file:
-              file.write(str(soup))
-          EOL
+          # 3. Új favicon linkeket a meta description tag után
+          sed -i '/<meta name="description"/a \    <link rel="icon" href="https://horvathzoltan.me/img/favicon.ico">\n    <link rel="icon" type="image/png" sizes="16x16" href="https://horvathzoltan.me/img/favicon-16x16.png">\n    <link rel="icon" type="image/png" sizes="32x32" href="https://horvathzoltan.me/img/favicon-32x32.png">\n    <link rel="apple-touch-icon" href="https://horvathzoltan.me/img/favicon-apple-touch-icon.png">\n    <link rel="mask-icon" href="https://horvathzoltan.me/safari-pinned-tab.svg">' resume/resume-en.html
 
       - name: Moving resume-en.html
         run: |
