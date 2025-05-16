@@ -22,6 +22,12 @@ jobs:
           theme-local: false
           theme-name: jsonresume-theme-reactive
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
       - name: Modify resume-en.html
         run: |
           npm install jsdom
