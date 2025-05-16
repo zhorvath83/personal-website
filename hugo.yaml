@@ -3,7 +3,7 @@ baseURL: 'https://horvathzoltan.me/'
 languageCode: en
 defaultContentLanguage: en
 title: "HorvathZoltan.me"
-copyright: "© 2024 [Horváth Zoltán](https://horvathzoltan.me) [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0)"
+copyright: "© 2025 [Horváth Zoltán](https://horvathzoltan.me) [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0)"
 
 enableRobotsTXT: true
 enableEmoji: true
@@ -99,6 +99,3 @@ params:
     - name: codepen
       title: My tech stack
       url: 'https://stackshare.io/zhorvath83/my-stack'
-    - name: email
-      title: Mail me
-      url: 'mailto:contact@horvathzoltan.me'
