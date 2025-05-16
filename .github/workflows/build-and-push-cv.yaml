@@ -30,45 +30,31 @@ jobs:
 
       - name: Modify resume-en.html
         run: |
-          npm install jsdom
           node -e '
             const fs = require("fs");
-            const { JSDOM } = require("jsdom");
+            const path = require("path");
             
-            // Olvassuk be a HTML fájlt
-            const filePath = "resume/resume-en.html";
-            const html = fs.readFileSync(filePath, "utf8");
+            // Fájl útvonal
+            const filePath = path.join(process.cwd(), "resume/resume-en.html");
             
-            // Hozzuk létre a DOM-ot
-            const dom = new JSDOM(html);
-            const document = dom.window.document;
+            // Olvassuk be a fájlt
+            let content = fs.readFileSync(filePath, "utf8");
             
-            // Módosítsuk a címet
-            document.title = "CV | HorvathZoltan.me";
+            // Cseréljük le a title-t
+            content = content.replace(/<title>.*?<\/title>/, "<title>CV | HorvathZoltan.me</title>");
             
-            // Távolítsuk el a régi favicon-t és adjuk hozzá az újakat
-            const head = document.querySelector("head");
-            const oldFavicon = document.querySelector("link[rel=\"icon\"]");
-            if (oldFavicon) oldFavicon.remove();
+            // Cseréljük le a favicon-t
+            const faviconReplacement = `<link rel="icon" href="https://horvathzoltan.me/img/favicon.ico">
+          <link rel="icon" type="image/png" sizes="16x16" href="https://horvathzoltan.me/img/favicon-16x16.png">
+          <link rel="icon" type="image/png" sizes="32x32" href="https://horvathzoltan.me/img/favicon-32x32.png">
+          <link rel="apple-touch-icon" href="https://horvathzoltan.me/img/favicon-apple-touch-icon.png">
+          <link rel="mask-icon" href="https://horvathzoltan.me/safari-pinned-tab.svg">`;
             
-            const faviconHTML = `
-              <link rel="icon" href="https://horvathzoltan.me/img/favicon.ico">
-              <link rel="icon" type="image/png" sizes="16x16" href="https://horvathzoltan.me/img/favicon-16x16.png">
-              <link rel="icon" type="image/png" sizes="32x32" href="https://horvathzoltan.me/img/favicon-32x32.png">
-              <link rel="apple-touch-icon" href="https://horvathzoltan.me/img/favicon-apple-touch-icon.png">
-              <link rel="mask-icon" href="https://horvathzoltan.me/safari-pinned-tab.svg">
-            `;
+            content = content.replace(/<link rel="icon".*?\/>/, faviconReplacement);
             
-            // Add favicons before the first style tag
-            const firstStyle = document.querySelector("style");
-            if (firstStyle) {
-              firstStyle.insertAdjacentHTML("beforebegin", faviconHTML);
-            } else {
-              head.insertAdjacentHTML("beforeend", faviconHTML);
-            }
+            // Írjuk vissza a fájlt
+            fs.writeFileSync(filePath, content);
             
-            // Mentsük el a módosított HTML-t
-            fs.writeFileSync(filePath, dom.serialize());
             console.log("HTML file successfully modified!");
           '
 
