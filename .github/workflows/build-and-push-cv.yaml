@@ -27,11 +27,12 @@ jobs:
           # 1. Cseréld a title-t
           sed -i 's/<title>CV - Zoltán Horváth<\/title>/<title>CV | HorvathZoltan.me<\/title>/' resume/resume-en.html
           
-          # 2. Töröli a régi favicon-t
+          # 2. Töröld a régi favicon-t
           sed -i '/<link rel="icon" type="image\/svg+xml"/d' resume/resume-en.html
           
-          # 3. Új favicon linkeket a meta description tag után
-          sed -i '/<meta name="description"/a \    <link rel="icon" href="https://horvathzoltan.me/img/favicon.ico">\n    <link rel="icon" type="image/png" sizes="16x16" href="https://horvathzoltan.me/img/favicon-16x16.png">\n    <link rel="icon" type="image/png" sizes="32x32" href="https://horvathzoltan.me/img/favicon-32x32.png">\n    <link rel="apple-touch-icon" href="https://horvathzoltan.me/img/favicon-apple-touch-icon.png">\n    <link rel="mask-icon" href="https://horvathzoltan.me/safari-pinned-tab.svg">' resume/resume-en.html
+          # 3. Módosítsd a meta description tag-et, hogy megfelelően le legyen zárva
+          # és add hozzá az új favicon linkeket utána
+          sed -i 's/\(<meta name="description" content=".*\)\("\/>\)\?/\1"\/>\n    <link rel="icon" href="https:\/\/horvathzoltan.me\/img\/favicon.ico">\n    <link rel="icon" type="image\/png" sizes="16x16" href="https:\/\/horvathzoltan.me\/img\/favicon-16x16.png">\n    <link rel="icon" type="image\/png" sizes="32x32" href="https:\/\/horvathzoltan.me\/img\/favicon-32x32.png">\n    <link rel="apple-touch-icon" href="https:\/\/horvathzoltan.me\/img\/favicon-apple-touch-icon.png">\n    <link rel="mask-icon" href="https:\/\/horvathzoltan.me\/safari-pinned-tab.svg">/' resume/resume-en.html
 
       - name: Moving resume-en.html
         run: |
