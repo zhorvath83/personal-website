@@ -22,18 +22,16 @@ jobs:
           theme-local: false
           theme-name: jsonresume-theme-reactive
 
-      # - name: Modify resume-en.html
-      #   run: |
-      #     # Title módosítása
-      #     sed -i 's#<title>.*</title>#<title>CV | HorvathZoltan.me</title>#' resume/resume-en.html
-      #     
-      #     # Favicon linkek hozzáadása a head-en belülre
-      #     sed -i 's#<head>#<head>\
-      #     <link rel="icon" href="https://horvathzoltan.me/img/favicon.ico">\
-      #     <link rel="icon" type="image/png" sizes="16x16" href="https://horvathzoltan.me/img/favicon-16x16.png">\
-      #     <link rel="icon" type="image/png" sizes="32x32" href="https://horvathzoltan.me/img/favicon-32x32.png">\
-      #     <link rel="apple-touch-icon" href="https://horvathzoltan.me/img/favicon-apple-touch-icon.png">\
-      #     <link rel="mask-icon" href="https://horvathzoltan.me/safari-pinned-tab.svg">#' resume/resume-en.html
+      - name: Modify resume-en.html
+        run: |
+          # Change the title to "CV | HorvathZoltan.me"
+          sed -i 's/<title>CV - Zoltán Horváth<\/title>/<title>CV | HorvathZoltan.me<\/title>/' resume/resume-en.html
+          
+          # Remove the existing favicon link
+          sed -i '/<link rel="icon" type="image\/svg+xml" href="data:image\/svg+xml/d' resume/resume-en.html
+          
+          # Add the new favicon links (right after the meta description tag)
+          sed -i '/<meta name="description"/a \    <link rel="icon" href="https:\/\/horvathzoltan.me\/img\/favicon.ico">\n    <link rel="icon" type="image\/png" sizes="16x16" href="https:\/\/horvathzoltan.me\/img\/favicon-16x16.png">\n    <link rel="icon" type="image\/png" sizes="32x32" href="https:\/\/horvathzoltan.me\/img\/favicon-32x32.png">\n    <link rel="apple-touch-icon" href="https:\/\/horvathzoltan.me\/img\/favicon-apple-touch-icon.png">\n    <link rel="mask-icon" href="https:\/\/horvathzoltan.me\/safari-pinned-tab.svg">' resume/resume-en.html
 
       - name: Moving resume-en.html
         run: |
