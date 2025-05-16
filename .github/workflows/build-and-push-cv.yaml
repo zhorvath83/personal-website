@@ -22,7 +22,9 @@ jobs:
           theme-local: false
           theme-name: jsonresume-theme-reactive
       
-      - run: ls -la
+      - run: |
+          cd resume
+          ls -la
 
       - name: Modify resume-en.html
         run: |
