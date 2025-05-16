@@ -24,10 +24,12 @@ jobs:
 
       - name: Modify resume-en.html
         run: |
-          # Install BeautifulSoup if needed
-          pip install beautifulsoup4
+          # Ensure we have write permissions to the file
+          chmod +w resume/resume-en.html
           
-          # Run Python script to modify the HTML
+          # Install BeautifulSoup
+          python -m pip install beautifulsoup4
+          
           python - << 'EOL'
           from bs4 import BeautifulSoup
           
