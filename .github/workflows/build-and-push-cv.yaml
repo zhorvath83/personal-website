@@ -24,6 +24,7 @@ jobs:
       
       - run: |
           cd resume
+          chmod 0777 resume-en.html
           ls -la
 
       - name: Modify resume-en.html
