@@ -24,12 +24,12 @@ jobs:
 
       - name: Modify resume-en.html
         run: |
-          # A title módosítása - egyszerű elválasztó karakterrel
+          # A title módosítása
           sed -i 's#<title>.*</title>#<title>CV | HorvathZoltan.me</title>#' resume/resume-en.html
           
           # Favicon link hozzáadása a head végéhez közvetlenül a </head> elé
-          awk '/<\/head>/{print "<link rel=\"icon\" href=\"https://horvathzoltan.me/img/favicon.ico\">";print "<link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"https://horvathzoltan.me/img/favicon-16x16.png\">";print "<link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"https://horvathzoltan.me/img/favicon-32x32.png\">";print "<link rel=\"apple-touch-icon\" href=\"https://horvathzoltan.me/img/favicon-apple-touch-icon.png\">";print "<link rel=\"mask-icon\" href=\"https://horvathzoltan.me/safari-pinned-tab.svg\">";}1' resume/resume-en.html.bak > resume/resume-en.html
-    
+          awk -i inplace '/<\/head>/{print "<link rel=\"icon\" href=\"https://horvathzoltan.me/img/favicon.ico\">";print "<link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"https://horvathzoltan.me/img/favicon-16x16.png\">";print "<link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"https://horvathzoltan.me/img/favicon-32x32.png\">";print "<link rel=\"apple-touch-icon\" href=\"https://horvathzoltan.me/img/favicon-apple-touch-icon.png\">";print "<link rel=\"mask-icon\" href=\"https://horvathzoltan.me/safari-pinned-tab.svg\">";}1' resume/resume-en.html
+
       - name: Moving resume-en.html
         run: |
           mkdir -p static/cv
