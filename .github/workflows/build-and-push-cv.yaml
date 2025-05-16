@@ -21,6 +21,8 @@ jobs:
           output-type: html
           theme-local: false
           theme-name: jsonresume-theme-reactive
+      
+      - run: ls -la
 
       - name: Modify resume-en.html
         run: |
