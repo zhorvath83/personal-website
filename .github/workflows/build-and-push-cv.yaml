@@ -12,17 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # - name: Replace variables
-      #   uses: cschleiden/replace-tokens@v1
-      #   with:
-      #     tokenPrefix: '¤{'
-      #     tokenSuffix: '}'
-      #     files: '["**/config.yaml","**/resume-en.json"]'
-      #   env:
-      #     PROJECT_OWNER_EMAIL: ${{ secrets.PROJECT_OWNER_EMAIL }}
-      #     PROJECT_OWNER_PHONE:  ${{ secrets.PROJECT_OWNER_PHONE }}
-      #     ROOT_DOMAIN: ${{ secrets.ROOT_DOMAIN }}
-
       - uses: Devleaps/jsonresume-generator@v1
         id: jsonresume-html-generator
         with:
@@ -36,23 +25,17 @@ jobs:
       - name: Modify resume-en.html
         run: |
           # Title módosítása
-          sed -i 's/<title>.*<\/title>/<title>CV | HorvathZoltan.me<\/title>/' resume/resume-en.html
+          sed -i 's#<title>.*</title>#<title>CV | HorvathZoltan.me</title>#' resume/resume-en.html
           
-          # Favicon linkek cseréje
-          # Először az összes ikon link eltávolítása
+          # Az összes favicon link eltávolítása
           sed -i '/<link rel="icon"/d' resume/resume-en.html
           
-          # Új favicon linkek hozzáadása a </head> elé
-          cat > favicon_links.txt << 'EOF'
-          <link rel="icon" href="https://horvathzoltan.me/img/favicon.ico">
-          <link rel="icon" type="image/png" sizes="16x16" href="https://horvathzoltan.me/img/favicon-16x16.png">
-          <link rel="icon" type="image/png" sizes="32x32" href="https://horvathzoltan.me/img/favicon-32x32.png">
-          <link rel="apple-touch-icon" href="https://horvathzoltan.me/img/favicon-apple-touch-icon.png">
-          <link rel="mask-icon" href="https://horvathzoltan.me/safari-pinned-tab.svg">
-          EOF
-          
-          # Az új favicon linkek beszúrása a </head> elé
-          sed -i 's/<\/head>/'"$(cat favicon_links.txt | tr '\n' ' ')"'<\/head>/' resume/resume-en.html
+          # Favicon linkek beszúrása egyesével
+          sed -i '/<\/head>/ i\<link rel="icon" href="https://horvathzoltan.me/img/favicon.ico">' resume/resume-en.html
+          sed -i '/<\/head>/ i\<link rel="icon" type="image/png" sizes="16x16" href="https://horvathzoltan.me/img/favicon-16x16.png">' resume/resume-en.html
+          sed -i '/<\/head>/ i\<link rel="icon" type="image/png" sizes="32x32" href="https://horvathzoltan.me/img/favicon-32x32.png">' resume/resume-en.html
+          sed -i '/<\/head>/ i\<link rel="apple-touch-icon" href="https://horvathzoltan.me/img/favicon-apple-touch-icon.png">' resume/resume-en.html
+          sed -i '/<\/head>/ i\<link rel="mask-icon" href="https://horvathzoltan.me/safari-pinned-tab.svg">' resume/resume-en.html
     
       - name: Moving resume-en.html
         run: |
