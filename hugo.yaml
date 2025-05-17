@@ -49,8 +49,8 @@ module:
 
 params:
   env: production
-  defaultTheme: light
-  disableThemeToggle: true
+  defaultTheme: auto
+  disableThemeToggle: false
   ShowCodeCopyButtons: true
   DateFormat: "2006-01-02"
   # ShowReadingTime: true
