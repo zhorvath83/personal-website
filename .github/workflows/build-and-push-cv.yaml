@@ -43,7 +43,7 @@ jobs:
             let content = fs.readFileSync(filePath, "utf8");
             
             // Cseréljük le a title-t
-            content = content.replace(/<title>.*?<\/title>/, "<title>CV | HorvathZoltan.me</title>");
+            content = content.replace(/<title>.*?<\/title>/, "<title>CV 👨‍💼 | HorvathZoltan.me</title>");
             
             // Cseréljük le a favicon-t
             const faviconReplacement = `<link rel="icon" href="https://horvathzoltan.me/favicon.ico">
