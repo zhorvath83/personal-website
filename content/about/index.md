@@ -1,13 +1,13 @@
 ---
 title: "About Me 👋"
-date: 2024-10-13
+date: 2025-05-17
 draft: false
 ---
 
 {{< notice info >}}
 My name is Zoltán Horváth, and I’m a Solution Architect from Hungary, based in Budapest.
 
-I have been working in the IT industry for nearly 20 years, with a strong focus on designing and implementing scalable, secure, and efficient solutions for enterprise environments.
+I have been working in the IT industry for over 20 years, with a strong focus on designing and implementing scalable, secure, and efficient solutions for enterprise environments.
 
 My expertise spans multiple areas including Mobile Device Management (iOS, macOS), CI/CD pipelines, microservices architecture, enterprise infrastructure integration, core banking and instant payment (AFR) software development.
 
