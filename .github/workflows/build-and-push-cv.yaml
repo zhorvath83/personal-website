@@ -46,12 +46,10 @@ jobs:
             content = content.replace(/<title>.*?<\/title>/, "<title>CV | HorvathZoltan.me</title>");
             
             // Cseréljük le a favicon-t
-            const faviconReplacement = `<link rel="icon" href="https://horvathzoltan.me/img/favicon.ico">
-          <link rel="icon" type="image/png" sizes="16x16" href="https://horvathzoltan.me/img/favicon-16x16.png">
-          <link rel="icon" type="image/png" sizes="32x32" href="https://horvathzoltan.me/img/favicon-32x32.png">
-          <link rel="apple-touch-icon" href="https://horvathzoltan.me/img/favicon-apple-touch-icon.png">
-          <link rel="mask-icon" href="https://horvathzoltan.me/safari-pinned-tab.svg">`;
-            
+            const faviconReplacement = `<link rel="icon" href="https://horvathzoltan.me/favicon.ico">
+          <link rel="icon" type="image/png" sizes="16x16" href="https://horvathzoltan.me/favicon-16x16.png">
+          <link rel="icon" type="image/png" sizes="32x32" href="https://horvathzoltan.me/favicon-32x32.png">
+          <link rel="apple-touch-icon" href="https://horvathzoltan.me/favicon-apple-touch-icon.png">`;
             content = content.replace(/<link rel="icon".*?\/>/, faviconReplacement);
             
             // Írjuk vissza a fájlt
