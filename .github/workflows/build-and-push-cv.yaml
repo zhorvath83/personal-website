@@ -52,6 +52,10 @@ jobs:
           <link rel="apple-touch-icon" href="https://horvathzoltan.me/favicon-apple-touch-icon.png">`;
             content = content.replace(/<link rel="icon".*?\/>/, faviconReplacement);
             
+            // Beszúrjuk az Umami analytics scriptet a </head> elé
+            const umamiScript = `<script defer src="https://cloud.umami.is/script.js" data-website-id="fb10bb93-a030-4e33-9b3d-05b2abd75d03"></script>`;
+            content = content.replace("</head>", `${umamiScript}\n</head>`);
+            
             // Írjuk vissza a fájlt
             fs.writeFileSync(filePath, content);
             
