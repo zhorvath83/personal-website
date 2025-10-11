@@ -25,18 +25,23 @@ personal-website/
 ├── go.mod                     # Theme dependencies
 │
 ├── content/
-│   └── about/index.md         # About page
+│   ├── about.md               # About page
+│   └── cv.md                  # CV page content
 │
 ├── layouts/
+│   ├── cv/
+│   │   └── single.html        # CV page layout (PaperMod frame + iframe)
 │   └── partials/
 │       └── extend_head.html   # Custom <head> content (analytics)
 │
 ├── resume/
-│   ├── resume.json            # CV source
-│   └── resume.html            # CI-generated
+│   ├── resume.json            # CV source (single source of truth)
+│   └── resume.html            # CI-generated (intermediate)
 │
 ├── static/
-│   ├── cv/                    # CI-generated (HTML + PDF)
+│   ├── resume/                # CI-generated (HTML + PDF)
+│   │   ├── index.html         # Standalone CV HTML (iframe source)
+│   │   └── Zoltan_Horvath_CV.pdf
 │   └── img/                   # Images
 │
 ├── public/                    # Hugo build output (git ignored)
@@ -49,10 +54,11 @@ personal-website/
 
 ### ✅ Auto-Allowed (Push Without Asking)
 
-- **Content**: `content/about/index.md` edits
+- **Content**: `content/about.md` edits
 - **Images**: Adding/modifying `static/img/*` (follow IT naming)
 - **Minor config**: `hugo.yaml` param changes (colors, titles, menu labels)
 - **Theme customization**: `layouts/partials/extend_head.html` for analytics/custom head
+- **CV layout**: `layouts/cv/single.html` modifications
 - **Git ops**: Commit, push to main
 - **Dependencies**: Merge Renovate PRs
 
@@ -64,7 +70,7 @@ personal-website/
 
 ### ❌ Never Touch
 
-- **CI-generated**: `static/cv/*`, `resume.html`
+- **CI-generated**: `static/resume/*`, `resume.html`
 - **Build artifacts**: `public/`, `resources/`, `.hugo_build.lock`
 
 ---
@@ -115,7 +121,7 @@ rm -rf public/ resources/ && hugo
 
 ```bash
 # Edit content
-vim content/about/index.md
+vim content/about.md
 
 # ⚠️ MANDATORY: Test locally BEFORE commit
 hugo server -D
@@ -123,7 +129,7 @@ hugo server -D
 # User validates in browser
 
 # After validation → push
-git add content/about/index.md
+git add content/about.md
 git commit -m "update about page"
 git push origin main
 ```
@@ -192,7 +198,7 @@ git push origin main
 Push to main
     ↓
 ├─→ resume.json changed?
-│   └─→ GitHub Action: Generate HTML + PDF → Commit to static/cv/
+│   └─→ GitHub Action: Generate HTML + PDF → Commit to static/resume/
 │
 └─→ Cloudflare Pages: hugo build → Deploy
 ```
@@ -207,8 +213,46 @@ Push to main
 
 - **Home**: https://horvathzoltan.me/
 - **About**: https://horvathzoltan.me/about/
-- **CV HTML**: https://horvathzoltan.me/cv/
-- **CV PDF**: https://horvathzoltan.me/cv/Zoltan_Horvath_CV.pdf
+- **CV Page**: https://horvathzoltan.me/cv/ (PaperMod frame)
+- **CV Standalone**: https://horvathzoltan.me/resume/ (iframe source)
+- **CV PDF**: https://horvathzoltan.me/resume/Zoltan_Horvath_CV.pdf
+
+---
+
+## CV Architecture
+
+The CV system uses a hybrid approach for optimal integration with PaperMod theme:
+
+### Source of Truth
+- **`resume/resume.json`**: JSON Resume format (single source)
+
+### CI/CD Pipeline (GitHub Actions)
+When `resume.json` changes:
+1. Generate standalone HTML with `jsonresume-theme-reactive`
+2. Apply print CSS fixes for PDF generation
+3. Generate PDF from HTML using Puppeteer
+4. Output:
+   - `static/resume/index.html` (standalone, responsive)
+   - `static/resume/Zoltan_Horvath_CV.pdf`
+
+### Hugo Integration
+- **`content/cv.md`**: CV page metadata
+- **`layouts/cv/single.html`**: Custom layout with:
+  - PaperMod header/footer (navigation, theme toggle)
+  - Full-width iframe embedding `/resume/`
+  - JavaScript theme sync (PaperMod ↔ iframe)
+  - Floating PDF download button (PaperMod styled)
+
+### Theme Synchronization
+JavaScript automatically:
+- Detects PaperMod theme changes (light/dark/auto)
+- Reloads iframe and injects CSS overrides
+- Maintains consistent look across theme toggles
+
+### URL Structure
+- `/cv` → Main CV page (PaperMod integrated)
+- `/resume/` → Standalone HTML (iframe source, print-friendly)
+- `/resume/Zoltan_Horvath_CV.pdf` → Downloadable PDF
 
 ---
 
