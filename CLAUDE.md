@@ -267,8 +267,7 @@ Checks on every commit:
 - Trailing whitespace (auto-fix)
 
 ### Safe to Commit
-✅ Public email: contact@horvathzoltan.me  
-✅ Public phone: +36 (30) 946 1662  
+✅ Public data
 ✅ Social links, CV content
 
 ### Never Commit
