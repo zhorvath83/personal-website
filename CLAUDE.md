@@ -27,6 +27,10 @@ personal-website/
 ├── content/
 │   └── about/index.md         # About page
 │
+├── layouts/
+│   └── partials/
+│       └── extend_head.html   # Custom <head> content (analytics)
+│
 ├── resume/
 │   ├── resume-en.json         # CV source
 │   └── resume-en.html         # CI-generated
@@ -48,6 +52,7 @@ personal-website/
 - **Content**: `content/about/index.md` edits
 - **Images**: Adding/modifying `static/img/*` (follow IT naming)
 - **Minor config**: `hugo.yaml` param changes (colors, titles, menu labels)
+- **Theme customization**: `layouts/partials/extend_head.html` for analytics/custom head
 - **Git ops**: Commit, push to main
 - **Dependencies**: Merge Renovate PRs
 
