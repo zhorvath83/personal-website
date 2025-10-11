@@ -90,22 +90,44 @@ jobs:
       - name: Moving resume.html
         run: |
           mkdir -p static/cv
-          mv -f resume/resume.html static/cv/index.html
+          cp resume/resume.html static/cv/index.html
 
-      - uses: Devleaps/jsonresume-generator@v1
-        id: jsonresume-pdf-generator
-        with:
-          action: render
-          file: resume.json
-          folder: resume/
-          output-type: pdf
-          theme-local: false
-          theme-name: jsonresume-theme-reactive
-
-      - name: Moving resume.pdf
+      - name: Generate PDF from modified HTML using Puppeteer
         run: |
-          mkdir -p static/cv
-          mv -f resume/resume.pdf static/cv/Zoltan_Horvath_CV.pdf
+          npm install -g puppeteer
+          node -e '
+            const puppeteer = require("puppeteer");
+            const fs = require("fs");
+            const path = require("path");
+            
+            (async () => {
+              const browser = await puppeteer.launch({
+                headless: true,
+                args: ["--no-sandbox", "--disable-setuid-sandbox"]
+              });
+              
+              const page = await browser.newPage();
+              const htmlPath = path.join(process.cwd(), "static/cv/index.html");
+              const htmlContent = fs.readFileSync(htmlPath, "utf8");
+              
+              await page.setContent(htmlContent, { waitUntil: "networkidle0" });
+              
+              await page.pdf({
+                path: "static/cv/Zoltan_Horvath_CV.pdf",
+                format: "A4",
+                printBackground: true,
+                margin: {
+                  top: "0mm",
+                  right: "0mm",
+                  bottom: "0mm",
+                  left: "0mm"
+                }
+              });
+              
+              await browser.close();
+              console.log("PDF successfully generated from modified HTML!");
+            })();
+          '
 
       - name: Commit published resume files
         id: commit
