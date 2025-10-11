@@ -21,10 +21,26 @@
   }
 }
 
-/* Profile mode avatar: move up slightly */
+/* Profile mode avatar: move up slightly with blob animation */
 .main .profile .profile_inner > img {
-  margin-top: -15px !important;
-  transform: translateY(-15px) !important;
+  margin-top: -10px !important;
+  transform: translateY(-10px) !important;
+  animation: image-blob 30s ease-in-out infinite !important;
+}
+
+@keyframes image-blob {
+  0%, 100% {
+    border-radius: 58% 42% 35% 65% / 55% 38% 62% 45%;
+  }
+  25% {
+    border-radius: 42% 58% 62% 38% / 45% 62% 38% 55%;
+  }
+  50% {
+    border-radius: 38% 62% 58% 42% / 62% 45% 55% 38%;
+  }
+  75% {
+    border-radius: 55% 45% 40% 60% / 40% 58% 42% 60%;
+  }
 }
 </style>
 

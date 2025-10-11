@@ -71,10 +71,10 @@ params:
     title: "Horváth Zoltán"
     subtitle: "Solution Architect"
     # subtitle: "Hi there! \U0001F44B </br> Welcome to my website."
-    imageUrl: "/img/HZ_avatar_bw_circular.png"
+    imageUrl: "/img/HZ_avatar_bw_square.jpeg"
     imageTitle: "Horváth Zoltán"
-    imageWidth: 250
-    imageHeight: 250
+    imageWidth: 350
+    imageHeight: 320
     buttons:
       - identifier: about
         name: About Me
