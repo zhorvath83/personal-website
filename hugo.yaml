@@ -73,8 +73,8 @@ params:
     # subtitle: "Hi there! \U0001F44B </br> Welcome to my website."
     imageUrl: "/img/HZ_avatar_bw_circular.png"
     imageTitle: "Horváth Zoltán"
-    imageWidth: 200
-    imageHeight: 200
+    imageWidth: 250
+    imageHeight: 250
     buttons:
       - identifier: about
         name: About Me
