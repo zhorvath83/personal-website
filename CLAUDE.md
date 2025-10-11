@@ -32,8 +32,8 @@ personal-website/
 │       └── extend_head.html   # Custom <head> content (analytics)
 │
 ├── resume/
-│   ├── resume-en.json         # CV source
-│   └── resume-en.html         # CI-generated
+│   ├── resume.json            # CV source
+│   └── resume.html            # CI-generated
 │
 ├── static/
 │   ├── cv/                    # CI-generated (HTML + PDF)
@@ -58,13 +58,13 @@ personal-website/
 
 ### ⚠️ Ask First
 
-- **CV changes**: ANY edit to `resume/resume-en.json`
+- **CV changes**: ANY edit to `resume/resume.json`
 - **Structural config**: Theme add/remove, new sections in `hugo.yaml`
 - **CLAUDE.md**: This file modifications
 
 ### ❌ Never Touch
 
-- **CI-generated**: `static/cv/*`, `resume-en.html`
+- **CI-generated**: `static/cv/*`, `resume.html`
 - **Build artifacts**: `public/`, `resources/`, `.hugo_build.lock`
 
 ---
@@ -83,10 +83,10 @@ hugo server -D
 **ALWAYS run before commit:**
 ```bash
 # 1. JSON syntax check
-cat resume/resume-en.json | jq empty
+cat resume/resume.json | jq empty
 
 # 2. Schema validation
-cd resume && cp resume-en.json resume.json && resume validate && rm resume.json && cd ..
+cd resume && resume validate && cd ..
 ```
 
 **Rule**: No commit without successful validation!
@@ -147,18 +147,18 @@ git push origin main
 
 ```bash
 # Edit JSON
-vim resume/resume-en.json
+vim resume/resume.json
 
 # ⚠️ MANDATORY: Validate BEFORE commit
 # 1. Validate JSON syntax
-cat resume/resume-en.json | jq empty
+cat resume/resume.json | jq empty
 
 # 2. Validate schema with resume-cli
-cd resume && cp resume-en.json resume.json && resume validate && rm resume.json && cd ..
+cd resume && resume validate && cd ..
 
 # ⚠️ STOP - Show changes to user → Get approval → Then push
 
-git add resume/resume-en.json
+git add resume/resume.json
 git commit -m "chore(resume): description"
 git push origin main
 
