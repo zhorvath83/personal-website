@@ -92,9 +92,14 @@ jobs:
           mkdir -p static/cv
           cp resume/resume.html static/cv/index.html
 
+      - name: Setup Node.js for PDF generation
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
       - name: Generate PDF from modified HTML using Puppeteer
         run: |
-          npm install -g puppeteer
+          npm install puppeteer
           node -e '
             const puppeteer = require("puppeteer");
             const fs = require("fs");
