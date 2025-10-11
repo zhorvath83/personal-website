@@ -79,10 +79,35 @@
           iframeDoc.head.appendChild(themeStyle);
         }
         
-        // Sötét téma kikényszerítése
+        // Sötét téma kikényszerítése VAGY világos téma kikényszerítése
         if (isDark) {
+          // Sötét mód: felülírjuk a színeket ÉS letiltjuk a prefers-color-scheme-et
           themeStyle.textContent = `
-            /* Sötét téma kikényszerítése */
+            /* MINDIG sötét téma, függetlenül a rendszer beállítástól */
+            @media (prefers-color-scheme: light) {
+              /* Kikényszerítjük a sötét színeket még világos rendszertéma esetén is */
+              body {
+                background-color: #111827 !important;
+                color: #e5e7eb !important;
+              }
+              .bg-white {
+                background-color: #111827 !important;
+              }
+              .text-black {
+                color: #e5e7eb !important;
+              }
+              .bg-primary-200 {
+                background-color: #1f2937 !important;
+              }
+              .bg-primary-500 {
+                background-color: #374151 !important;
+              }
+              .border-black\\/20 {
+                border-color: rgba(255, 255, 255, 0.2) !important;
+              }
+            }
+            
+            /* Sötét mód kikényszerítése */
             body {
               background-color: #111827 !important;
               color: #e5e7eb !important;
@@ -113,8 +138,50 @@
             }
           `;
         } else {
-          // Világos téma visszaállítása (töröljük az override-ot)
-          themeStyle.textContent = '';
+          // Világos mód: kikényszerítjük a világos színeket még sötét rendszertéma esetén is
+          themeStyle.textContent = `
+            /* MINDIG világos téma, függetlenül a rendszer beállítástól */
+            @media (prefers-color-scheme: dark) {
+              /* Kikényszerítjük a világos színeket még sötét rendszertéma esetén is */
+              body {
+                background-color: #ffffff !important;
+                color: #000000 !important;
+              }
+              .bg-white {
+                background-color: #ffffff !important;
+              }
+              .text-black {
+                color: #000000 !important;
+              }
+              .dark\\:bg-gray-900 {
+                background-color: #ffffff !important;
+              }
+              .dark\\:bg-primary-800 {
+                background-color: #e5e7eb !important;
+              }
+              .dark\\:text-white {
+                color: #000000 !important;
+              }
+            }
+            
+            /* Világos mód kikényszerítése */
+            body {
+              background-color: #ffffff !important;
+              color: #000000 !important;
+            }
+            .bg-white {
+              background-color: #ffffff !important;
+            }
+            .text-black {
+              color: #000000 !important;
+            }
+            .bg-primary-200 {
+              background-color: color-mix(in srgb, var(--c-primary) 30%, white) !important;
+            }
+            .bg-primary-500 {
+              background-color: var(--c-primary) !important;
+            }
+          `;
         }
       } catch (e) {
         console.log('CORS miatt nem sikerült CSS-t injektálni:', e);
@@ -132,6 +199,11 @@
       setTimeout(applyThemeToIframe, 100);
     });
   }
+  
+  // Rendszer téma változás figyelése (custom event a extend_head.html-ből)
+  window.addEventListener('theme-changed', function() {
+    setTimeout(applyThemeToIframe, 100);
+  });
   
   // Első betöltéskor is alkalmazzuk
   applyThemeToIframe();
