@@ -208,7 +208,7 @@ Push to main
 - **Home**: https://horvathzoltan.me/
 - **About**: https://horvathzoltan.me/about/
 - **CV HTML**: https://horvathzoltan.me/cv/
-- **CV PDF**: https://horvathzoltan.me/cv/Zoltan_Horvath_en_CV.pdf
+- **CV PDF**: https://horvathzoltan.me/cv/Zoltan_Horvath_CV.pdf
 
 ---
 

@@ -80,7 +80,7 @@ jobs:
       - name: Moving resume.pdf
         run: |
           mkdir -p static/cv
-          mv -f resume/resume.pdf static/cv/Zoltan_Horvath_en_CV.pdf
+          mv -f resume/resume.pdf static/cv/Zoltan_Horvath_CV.pdf
 
       - name: Commit published resume files
         id: commit
