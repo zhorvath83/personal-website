@@ -42,16 +42,6 @@ jobs:
             // Olvassuk be a fájlt
             let content = fs.readFileSync(filePath, "utf8");
             
-            // Cseréljük le a title-t
-            content = content.replace(/<title>.*?<\/title>/, "<title>CV 👨‍💼 | HorvathZoltan.me</title>");
-            
-            // Cseréljük le a favicon-t
-            const faviconReplacement = `<link rel="icon" href="https://horvathzoltan.me/favicon.ico">
-          <link rel="icon" type="image/png" sizes="16x16" href="https://horvathzoltan.me/favicon-16x16.png">
-          <link rel="icon" type="image/png" sizes="32x32" href="https://horvathzoltan.me/favicon-32x32.png">
-          <link rel="apple-touch-icon" href="https://horvathzoltan.me/favicon-apple-touch-icon.png">`;
-            content = content.replace(/<link rel="icon".*?\/>/, faviconReplacement);
-            
             // PDF oldaltörés javítás - CSS patch beszúrása
             const printCssFix = `<style>
           @media print {
@@ -77,9 +67,8 @@ jobs:
           }
           </style>`;
             
-            // Beszúrjuk az Umami analytics scriptet és a CSS patch-et a </head> elé
-            const umamiScript = `<script defer src="https://cloud.umami.is/script.js" data-website-id="fb10bb93-a030-4e33-9b3d-05b2abd75d03"></script>`;
-            content = content.replace("</head>", `${printCssFix}\n${umamiScript}\n</head>`);
+            // Beszúrjuk a CSS patch-et a </head> elé (csak PDF generáláshoz kell)
+            content = content.replace("</head>", `${printCssFix}\n</head>`);
             
             // Írjuk vissza a fájlt
             fs.writeFileSync(filePath, content);
