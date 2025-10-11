@@ -13,7 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v4
 
       - uses: Devleaps/jsonresume-generator@v1
         id: jsonresume-html-generator
@@ -27,7 +27,7 @@ jobs:
       
       - run: |
           cd resume
-          chmod 0777 resume-en.html
+          chmod 0777 resume.html
           ls -la
 
       - name: Modify resume.html

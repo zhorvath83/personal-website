@@ -191,7 +191,7 @@ git push origin main
 ```
 Push to main
     ↓
-├─→ resume-en.json changed?
+├─→ resume.json changed?
 │   └─→ GitHub Action: Generate HTML + PDF → Commit to static/cv/
 │
 └─→ Cloudflare Pages: hugo build → Deploy
@@ -245,7 +245,7 @@ rm -rf public/ resources/ && hugo
 
 **CV workflow fails**:
 ```bash
-cat resume/resume-en.json | jq empty  # Validate JSON
+cat resume/resume.json | jq empty  # Validate JSON
 # Check GitHub Actions logs
 ```
 
