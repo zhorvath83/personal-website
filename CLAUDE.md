@@ -69,6 +69,30 @@ personal-website/
 
 ---
 
+## Validation Rules (MANDATORY BEFORE COMMIT)
+
+### Hugo Content/Config Changes
+**ALWAYS run before commit:**
+```bash
+hugo server -D
+# → Check http://localhost:1313/
+# → User must validate visually in browser
+```
+
+### Resume Changes
+**ALWAYS run before commit:**
+```bash
+# 1. JSON syntax check
+cat resume/resume-en.json | jq empty
+
+# 2. Schema validation
+cd resume && cp resume-en.json resume.json && resume validate && rm resume.json && cd ..
+```
+
+**Rule**: No commit without successful validation!
+
+---
+
 ## Development Workflow
 
 ### Local Commands
@@ -93,10 +117,12 @@ rm -rf public/ resources/ && hugo
 # Edit content
 vim content/about/index.md
 
-# Test locally
+# ⚠️ MANDATORY: Test locally BEFORE commit
 hugo server -D
+# → http://localhost:1313/
+# User validates in browser
 
-# User validates → push
+# After validation → push
 git add content/about/index.md
 git commit -m "update about page"
 git push origin main
@@ -123,10 +149,11 @@ git push origin main
 # Edit JSON
 vim resume/resume-en.json
 
-# Validate syntax
+# ⚠️ MANDATORY: Validate BEFORE commit
+# 1. Validate JSON syntax
 cat resume/resume-en.json | jq empty
 
-# Validate schema
+# 2. Validate schema with resume-cli
 cd resume && cp resume-en.json resume.json && resume validate && rm resume.json && cd ..
 
 # ⚠️ STOP - Show changes to user → Get approval → Then push
