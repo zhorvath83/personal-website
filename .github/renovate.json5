@@ -1,102 +1,173 @@
 {
-  "enabled": true,
-  "timezone": "Europe/Budapest",
-  "semanticCommits": "enabled",
-  "dependencyDashboard": true,
-  "dependencyDashboardTitle": "Renovate Dashboard 🤖",
-  "commitBody": "Signed-off-by: Zoltán Horváth <zhorvath83@users.noreply.github.com>",
-  "suppressNotifications": ["prIgnoreNotification"],
-  "rebaseWhen": "conflicted",
-  "commitMessageTopic": "{{depName}}",
-  "commitMessageExtra": "to {{newVersion}}",
-  "commitMessageSuffix": "",
-  // Gyorsabb schedule: hetente vasárnap este
-  "schedule": ["after 10pm on sunday"],
-  "regexManagers": [
-    {
-      "fileMatch": [
-        "Dockerfile",
-        "hack/.+\\.sh$"
-      ],
-      "matchStrings": [
-        "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\n.*?_VERSION=(?<currentValue>.*)"
-      ],
-      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
-    }
+  enabled: true,
+  timezone: 'Europe/Budapest',
+  semanticCommits: 'enabled',
+  dependencyDashboard: true,
+  dependencyDashboardTitle: 'Renovate Dashboard 🤖',
+  commitBody: 'Signed-off-by: Zoltán Horváth <zhorvath83@users.noreply.github.com>',
+  suppressNotifications: [
+    'prIgnoreNotification',
   ],
-  "packageRules": [
-    // GitHub Actions specifikus szabályok
+  rebaseWhen: 'conflicted',
+  commitMessageTopic: '{{depName}}',
+  commitMessageExtra: 'to {{newVersion}}',
+  commitMessageSuffix: '',
+  schedule: [
+    'after 10pm on sunday',
+  ],
+  customManagers: [
     {
-      "matchManagers": ["github-actions"],
-      "enabled": true,
-      "semanticCommitScope": "ci",
-      "matchUpdateTypes": ["major"],
-      "commitMessagePrefix": "feat(ci): ",
-      "labels": ["ci/major"]
+      customType: 'regex',
+      managerFilePatterns: [
+        '/Dockerfile/',
+        '/hack/.+\\.sh$/',
+      ],
+      matchStrings: [
+        '# renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\n.*?_VERSION=(?<currentValue>.*)',
+      ],
+      versioningTemplate: '{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}',
+    },
+  ],
+  packageRules: [
+    {
+      matchManagers: [
+        'github-actions',
+      ],
+      enabled: true,
+      semanticCommitScope: 'ci',
+      matchUpdateTypes: [
+        'major',
+      ],
+      commitMessagePrefix: 'feat(ci): ',
+      labels: [
+        'ci/major',
+      ],
     },
     {
-      "matchManagers": ["github-actions"],
-      "matchUpdateTypes": ["minor"],
-      "semanticCommitType": "feat",
-      "commitMessagePrefix": "feat(ci): ",
-      "labels": ["ci/minor"]
+      matchManagers: [
+        'github-actions',
+      ],
+      matchUpdateTypes: [
+        'minor',
+      ],
+      semanticCommitType: 'feat',
+      commitMessagePrefix: 'feat(ci): ',
+      labels: [
+        'ci/minor',
+      ],
     },
     {
-      "matchManagers": ["github-actions"],
-      "matchUpdateTypes": ["patch"],
-      "semanticCommitType": "fix",
-      "commitMessagePrefix": "fix(ci): ",
-      "labels": ["ci/patch"]
-    },
-    // Pre-commit hooks specifikus szabályok
-    {
-      "matchManagers": ["pre-commit"],
-      "enabled": true,
-      "semanticCommitScope": "pre-commit",
-      "matchUpdateTypes": ["major"],
-      "commitMessagePrefix": "feat(pre-commit): ",
-      "labels": ["pre-commit/major"]
+      matchManagers: [
+        'github-actions',
+      ],
+      matchUpdateTypes: [
+        'patch',
+      ],
+      semanticCommitType: 'fix',
+      commitMessagePrefix: 'fix(ci): ',
+      labels: [
+        'ci/patch',
+      ],
     },
     {
-      "matchManagers": ["pre-commit"],
-      "matchUpdateTypes": ["minor"],
-      "semanticCommitType": "feat",
-      "commitMessagePrefix": "feat(pre-commit): ",
-      "labels": ["pre-commit/minor"]
+      matchManagers: [
+        'pre-commit',
+      ],
+      enabled: true,
+      semanticCommitScope: 'pre-commit',
+      matchUpdateTypes: [
+        'major',
+      ],
+      commitMessagePrefix: 'feat(pre-commit): ',
+      labels: [
+        'pre-commit/major',
+      ],
     },
     {
-      "matchManagers": ["pre-commit"],
-      "matchUpdateTypes": ["patch"],
-      "semanticCommitType": "fix",
-      "commitMessagePrefix": "fix(pre-commit): ",
-      "labels": ["pre-commit/patch"]
-    },
-    // Eredeti szabályok (docker, npm, pypi, stb.)
-    {
-      "matchDatasources": ["docker", "github-releases", "pypi", "npm", "repology"],
-      "semanticCommitScope": "deps",
-      "matchUpdateTypes": ["major"],
-      "commitMessagePrefix": "feat(deps): ",
-      "labels": ["dep/major"]
+      matchManagers: [
+        'pre-commit',
+      ],
+      matchUpdateTypes: [
+        'minor',
+      ],
+      semanticCommitType: 'feat',
+      commitMessagePrefix: 'feat(pre-commit): ',
+      labels: [
+        'pre-commit/minor',
+      ],
     },
     {
-      "matchDatasources": ["docker", "github-releases", "pypi", "npm", "repology"],
-      "matchUpdateTypes": ["minor"],
-      "semanticCommitType": "feat",
-      "labels": ["dep/minor"]
+      matchManagers: [
+        'pre-commit',
+      ],
+      matchUpdateTypes: [
+        'patch',
+      ],
+      semanticCommitType: 'fix',
+      commitMessagePrefix: 'fix(pre-commit): ',
+      labels: [
+        'pre-commit/patch',
+      ],
     },
     {
-      "matchDatasources": ["docker", "github-releases", "pypi", "npm", "repology"],
-      "matchUpdateTypes": ["patch"],
-      "semanticCommitType": "fix",
-      "labels": ["dep/patch"]
+      matchDatasources: [
+        'docker',
+        'github-releases',
+        'pypi',
+        'npm',
+        'repology',
+      ],
+      semanticCommitScope: 'deps',
+      matchUpdateTypes: [
+        'major',
+      ],
+      commitMessagePrefix: 'feat(deps): ',
+      labels: [
+        'dep/major',
+      ],
     },
-    // Automerge minor és patch frissítésekre
     {
-      "matchUpdateTypes": ["minor", "patch"],
-      "automerge": true,
-      "automergeType": "pr",
-      "matchPackagePatterns": [".*"]
-    }
-  ]
+      matchDatasources: [
+        'docker',
+        'github-releases',
+        'pypi',
+        'npm',
+        'repology',
+      ],
+      matchUpdateTypes: [
+        'minor',
+      ],
+      semanticCommitType: 'feat',
+      labels: [
+        'dep/minor',
+      ],
+    },
+    {
+      matchDatasources: [
+        'docker',
+        'github-releases',
+        'pypi',
+        'npm',
+        'repology',
+      ],
+      matchUpdateTypes: [
+        'patch',
+      ],
+      semanticCommitType: 'fix',
+      labels: [
+        'dep/patch',
+      ],
+    },
+    {
+      matchUpdateTypes: [
+        'minor',
+        'patch',
+      ],
+      automerge: true,
+      automergeType: 'pr',
+      matchPackageNames: [
+        '/.*/',
+      ],
+    },
+  ],
 }
