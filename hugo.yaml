@@ -35,12 +35,6 @@ menu:
       url: "https://dash.horvathzoltan.me/"
       weight: 15
 
-theme:
-  - github.com/martignoni/hugo-notice
-  - github.com/adityatelange/hugo-PaperMod
-  # - github.com/jpanther/congo/v2
-
-
 module:
   imports:
     - path: github.com/martignoni/hugo-notice
