@@ -30,7 +30,6 @@
       "matchManagers": ["github-actions"],
       "enabled": true,
       "semanticCommitScope": "ci",
-      "separateMinorPatch": true,
       "matchUpdateTypes": ["major"],
       "commitMessagePrefix": "feat(ci): ",
       "labels": ["ci/major"]
@@ -54,7 +53,6 @@
       "matchManagers": ["pre-commit"],
       "enabled": true,
       "semanticCommitScope": "pre-commit",
-      "separateMinorPatch": true,
       "matchUpdateTypes": ["major"],
       "commitMessagePrefix": "feat(pre-commit): ",
       "labels": ["pre-commit/major"]
@@ -77,7 +75,6 @@
     {
       "matchDatasources": ["docker", "github-releases", "pypi", "npm", "repology"],
       "semanticCommitScope": "deps",
-      "separateMinorPatch": true,
       "matchUpdateTypes": ["major"],
       "commitMessagePrefix": "feat(deps): ",
       "labels": ["dep/major"]
