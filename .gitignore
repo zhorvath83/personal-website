@@ -2,3 +2,9 @@
 /resources/*
 .hugo_build.lock
 .DS_Store
+.task/
+resume/Zoltan_Horvath_CV.pdf
+resume/resume.html
+resume/node_modules/
+static/resume/index.html
+static/resume/Zoltan_Horvath_CV.pdf
