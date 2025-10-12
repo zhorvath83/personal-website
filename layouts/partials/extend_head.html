@@ -1,7 +1,29 @@
+<!-- Umami Analytics -->
 <script defer src="https://cloud.umami.is/script.js" data-website-id="fb10bb93-a030-4e33-9b3d-05b2abd75d03"></script>
 
 <style>
-/* Theme toggle customization: shift slightly right and make 1.6x larger */
+/* ============================================
+   TYPEWRITER EFFECT STYLES
+   Blinking cursor animation for home page subtitle
+   ============================================ */
+.typewriter-cursor {
+  display: inline-block;
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+  color: var(--primary);
+  font-size: 1.2em;
+  font-weight: 300;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ============================================
+   THEME TOGGLE CUSTOMIZATION
+   Repositions and scales the theme toggle button
+   ============================================ */
 .header .logo-switches {
   margin-left: 10px !important;
   margin-top: 1px !important;
@@ -21,7 +43,10 @@
   }
 }
 
-/* Profile mode avatar: move up slightly with blob animation */
+/* ============================================
+   PROFILE AVATAR ANIMATION
+   Blob morphing effect for home page avatar
+   ============================================ */
 .main .profile .profile_inner > img {
   margin-top: -10px !important;
   transform: translateY(-10px) !important;
@@ -45,9 +70,12 @@
 </style>
 
 <script>
-// PaperMod runtime system theme change listener
+/* ============================================
+   SYSTEM THEME CHANGE LISTENER
+   Syncs PaperMod theme with OS dark/light mode
+   Updates body class and theme toggle icon
+   ============================================ */
 (function() {
-  // Várunk, amíg a PaperMod betöltődik
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initThemeListener);
   } else {
@@ -55,30 +83,29 @@
   }
   
   function initThemeListener() {
-    // Figyeljük a rendszer téma változását
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     
     function handleThemeChange(e) {
       const prefTheme = localStorage.getItem('pref-theme');
       
-      // Csak akkor avatkozunk be, ha auto téma van (vagy nincs beállítva)
+      // Only intervene if theme is set to auto (or not set)
       if (prefTheme !== null && prefTheme !== 'auto') {
-        return; // Manuális téma van beállítva, ne avatkozzunk bele
+        return;
       }
       
       const isDark = e.matches;
       
-      // Frissítjük a body class-t
+      // Update body class
       if (isDark) {
         document.body.classList.add('dark');
       } else {
         document.body.classList.remove('dark');
       }
       
-      // Frissítjük a theme-toggle ikont
+      // Update theme toggle icon
       updateThemeIcon(isDark);
       
-      // Triggerelünk egy custom event-et az iframe számára
+      // Trigger custom event for iframe (CV page)
       window.dispatchEvent(new CustomEvent('theme-changed', { detail: { isDark } }));
       
       console.log('System theme changed to:', isDark ? 'dark' : 'light');
@@ -88,7 +115,6 @@
       const themeToggle = document.getElementById('theme-toggle');
       if (!themeToggle) return;
       
-      // SVG ikonok frissítése
       const moonSvg = themeToggle.querySelector('svg[class="moon"]');
       const sunSvg = themeToggle.querySelector('svg[class="sun"]');
       
@@ -103,11 +129,128 @@
       }
     }
     
-    // Listener hozzáadása
     mediaQuery.addEventListener('change', handleThemeChange);
-    
-    // Első betöltéskor is ellenőrizzük
     handleThemeChange(mediaQuery);
+  }
+})();
+
+/* ============================================
+   TYPEWRITER EFFECT
+   Animated typing/deleting text on home page subtitle
+   Only runs on home page (/)
+   ============================================ */
+(function() {
+  console.log('[Typewriter] Script loaded, pathname:', window.location.pathname);
+  
+  // Only run on home page
+  if (window.location.pathname !== '/' && window.location.pathname !== '/index.html') {
+    console.log('[Typewriter] Not on home page, skipping');
+    return;
+  }
+
+  // List of roles to cycle through
+  const words = [
+    'Solution Architect',
+    'DevOps Practitioner',
+    'Apple MDM Specialist',
+    'Kubernetes Enthusiast',
+    'IaC Specialist'
+  ];
+  
+  let wordIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  let subtitleElement = null;
+  let typewriterSpan = null;
+  let cursorSpan = null;
+  let attempts = 0;
+  
+  // Initialize: find subtitle element and inject typewriter structure
+  function init() {
+    attempts++;
+    console.log('[Typewriter] Init attempt', attempts);
+    
+    // Find subtitle span in PaperMod profile
+    subtitleElement = document.querySelector('.profile_inner span') || 
+                      document.querySelector('.profile .profile_inner span') ||
+                      document.querySelector('.profile_inner h1 + span') ||
+                      document.querySelector('.profile span');
+    
+    console.log('[Typewriter] Found element:', subtitleElement);
+    
+    // Retry if element not found yet (DOM not ready)
+    if (!subtitleElement && attempts < 50) {
+      setTimeout(init, 100);
+      return;
+    }
+    
+    if (!subtitleElement) {
+      console.error('[Typewriter] Could not find subtitle element after 50 attempts');
+      return;
+    }
+    
+    console.log('[Typewriter] Original subtitle text:', subtitleElement.textContent);
+    
+    // Clear existing content and create typewriter elements
+    subtitleElement.innerHTML = '';
+    
+    typewriterSpan = document.createElement('span');
+    typewriterSpan.id = 'typewriter';
+    
+    cursorSpan = document.createElement('span');
+    cursorSpan.className = 'typewriter-cursor';
+    cursorSpan.textContent = '|';
+    
+    subtitleElement.appendChild(typewriterSpan);
+    subtitleElement.appendChild(cursorSpan);
+    
+    console.log('[Typewriter] Elements created, starting typing in 500ms');
+    
+    // Start typing animation
+    setTimeout(type, 500);
+  }
+  
+  // Main typing/deleting animation loop
+  function type() {
+    const currentWord = words[wordIndex];
+    
+    console.log('[Typewriter] Type called - deleting:', isDeleting, 'charIndex:', charIndex, 'word:', currentWord);
+    
+    if (isDeleting) {
+      // Delete one character
+      typewriterSpan.textContent = currentWord.substring(0, charIndex - 1);
+      charIndex--;
+      
+      // Finished deleting, move to next word
+      if (charIndex === 0) {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+        setTimeout(type, 500); // Pause before typing next word
+        return;
+      }
+    } else {
+      // Type one character
+      typewriterSpan.textContent = currentWord.substring(0, charIndex + 1);
+      charIndex++;
+      
+      // Finished typing, start deleting after pause
+      if (charIndex === currentWord.length) {
+        isDeleting = true;
+        setTimeout(type, 2000); // Pause at end of word
+        return;
+      }
+    }
+    
+    // Typing speed: faster when deleting, slower when typing
+    const speed = isDeleting ? 50 : 100;
+    setTimeout(type, speed);
+  }
+  
+  // Start when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
   }
 })();
 </script>
