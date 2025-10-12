@@ -10,7 +10,8 @@
   "commitMessageTopic": "{{depName}}",
   "commitMessageExtra": "to {{newVersion}}",
   "commitMessageSuffix": "",
-  "schedule": ["on the first day of the month"],
+  // Gyorsabb schedule: hetente vasárnap este
+  "schedule": ["after 10pm on sunday"],
   "regexManagers": [
     {
       "fileMatch": [
@@ -24,18 +25,63 @@
     }
   ],
   "packageRules": [
-    // setup datasources
+    // Alapértelmezett szabályok minden manager-re
     {
-      "enabled": true,
-      "matchDatasources": ["docker", "github-releases", "pypi", "npm", "repology"],
       "matchUpdateTypes": ["major", "minor", "patch"],
+      "enabled": true
     },
+    // Commit üzenetek minden típushoz
     {
-      "matchDatasources": ["docker", "github-releases", "pypi", "npm", "repology"],
       "semanticCommitScope": "deps",
       "separateMinorPatch": true
     },
-    // add labels according to package and update types
+    // GitHub Actions specifikus szabályok
+    {
+      "matchManagers": ["github-actions"],
+      "enabled": true,
+      "semanticCommitScope": "ci",
+      "matchUpdateTypes": ["major"],
+      "commitMessagePrefix": "feat(ci): ",
+      "labels": ["ci/major"]
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["minor"],
+      "semanticCommitType": "feat",
+      "commitMessagePrefix": "feat(ci): ",
+      "labels": ["ci/minor"]
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["patch"],
+      "semanticCommitType": "fix",
+      "commitMessagePrefix": "fix(ci): ",
+      "labels": ["ci/patch"]
+    },
+    // Pre-commit hooks specifikus szabályok
+    {
+      "matchManagers": ["pre-commit"],
+      "enabled": true,
+      "semanticCommitScope": "pre-commit",
+      "matchUpdateTypes": ["major"],
+      "commitMessagePrefix": "feat(pre-commit): ",
+      "labels": ["pre-commit/major"]
+    },
+    {
+      "matchManagers": ["pre-commit"],
+      "matchUpdateTypes": ["minor"],
+      "semanticCommitType": "feat",
+      "commitMessagePrefix": "feat(pre-commit): ",
+      "labels": ["pre-commit/minor"]
+    },
+    {
+      "matchManagers": ["pre-commit"],
+      "matchUpdateTypes": ["patch"],
+      "semanticCommitType": "fix",
+      "commitMessagePrefix": "fix(pre-commit): ",
+      "labels": ["pre-commit/patch"]
+    },
+    // Eredeti szabályok (docker, npm, pypi, stb.)
     {
       "matchDatasources": ["docker", "github-releases", "pypi", "npm", "repology"],
       "matchUpdateTypes": ["major"],
@@ -54,11 +100,11 @@
       "semanticCommitType": "fix",
       "labels": ["dep/patch"]
     },
+    // Automerge minor és patch frissítésekre
     {
-      "matchDatasources": ["docker", "github-releases", "pypi", "npm"],
+      "matchUpdateTypes": ["minor", "patch"],
       "automerge": true,
       "automergeType": "pr",
-      "matchUpdateTypes": ["minor", "patch"],
       "matchPackagePatterns": [".*"]
     }
   ]
