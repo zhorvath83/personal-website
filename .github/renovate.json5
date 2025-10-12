@@ -25,21 +25,12 @@
     }
   ],
   "packageRules": [
-    // Alapértelmezett szabályok minden manager-re
-    {
-      "matchUpdateTypes": ["major", "minor", "patch"],
-      "enabled": true
-    },
-    // Commit üzenetek minden típushoz
-    {
-      "semanticCommitScope": "deps",
-      "separateMinorPatch": true
-    },
     // GitHub Actions specifikus szabályok
     {
       "matchManagers": ["github-actions"],
       "enabled": true,
       "semanticCommitScope": "ci",
+      "separateMinorPatch": true,
       "matchUpdateTypes": ["major"],
       "commitMessagePrefix": "feat(ci): ",
       "labels": ["ci/major"]
@@ -63,6 +54,7 @@
       "matchManagers": ["pre-commit"],
       "enabled": true,
       "semanticCommitScope": "pre-commit",
+      "separateMinorPatch": true,
       "matchUpdateTypes": ["major"],
       "commitMessagePrefix": "feat(pre-commit): ",
       "labels": ["pre-commit/major"]
@@ -84,6 +76,8 @@
     // Eredeti szabályok (docker, npm, pypi, stb.)
     {
       "matchDatasources": ["docker", "github-releases", "pypi", "npm", "repology"],
+      "semanticCommitScope": "deps",
+      "separateMinorPatch": true,
       "matchUpdateTypes": ["major"],
       "commitMessagePrefix": "feat(deps): ",
       "labels": ["dep/major"]
