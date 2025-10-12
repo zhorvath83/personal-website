@@ -1,0 +1,154 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+vars:
+  RESUME_DIR: "{{.ROOT_DIR}}/resume"
+
+tasks:
+
+  generate:
+    desc: "Generate CV in HTML and PDF formats"
+    cmds:
+      - task: validate
+      - task: html
+      - task: pdf
+      - task: open
+
+  validate:
+    desc: "Validate resume.json schema"
+    internal: true
+    dir: "{{.RESUME_DIR}}"
+    cmds:
+      - |
+        echo "Validating resume.json..."
+        node -e '
+          const fs = require("fs");
+          try {
+            const resume = JSON.parse(fs.readFileSync("resume.json", "utf8"));
+            console.log("✓ Valid JSON schema");
+          } catch (error) {
+            console.error("✗ Invalid JSON:", error.message);
+            process.exit(1);
+          }
+        '
+
+  html:
+    desc: "Generate HTML resume"
+    internal: true
+    dir: "{{.RESUME_DIR}}"
+    cmds:
+      - |
+        echo "Generating HTML resume..."
+        # Install theme if not present (same as CI with theme-local: false)
+        if [ ! -d "node_modules/jsonresume-theme-reactive" ]; then
+          echo "Installing jsonresume-theme-reactive..."
+          npm install --no-save jsonresume-theme-reactive
+        fi
+        # Generate HTML using resumed CLI (same as Devleaps/jsonresume-generator Action)
+        npx resumed render resume.json --theme jsonresume-theme-reactive --output resume.html
+        echo "✓ HTML generated: {{.RESUME_DIR}}/resume.html"
+    sources:
+      - resume.json
+    generates:
+      - resume.html
+
+  pdf:
+    desc: "Generate PDF resume from HTML"
+    internal: true
+    dir: "{{.RESUME_DIR}}"
+    deps:
+      - html
+    cmds:
+      - |
+        echo "Modifying HTML for PDF generation..."
+        # Apply CSS patch for page breaks (same as CI)
+        node -e '
+          const fs = require("fs");
+          const path = require("path");
+          
+          const filePath = path.join(process.cwd(), "resume.html");
+          let content = fs.readFileSync(filePath, "utf8");
+          
+          const printCssFix = `<style>
+          @media print {
+            /* Remove page-break-inside: avoid from sections to allow proper page breaks */
+            section, article {
+              page-break-inside: auto !important;
+            }
+            
+            /* Keep headers with their content */
+            h1, h2, h3, h4, h5, h6 {
+              page-break-after: avoid !important;
+            }
+            
+            /* Avoid breaking inside individual work items */
+            section > div > article {
+              page-break-inside: avoid !important;
+            }
+            
+            /* Grid layout adjustments for print */
+            .grid {
+              page-break-inside: auto !important;
+            }
+          }
+          </style>`;
+          
+          content = content.replace("</head>", `${printCssFix}\n</head>`);
+          fs.writeFileSync(filePath, content);
+          console.log("✓ HTML modified for PDF generation");
+        '
+      - |
+        echo "Installing puppeteer..."
+        # Install puppeteer if not present (same as CI)
+        if [ ! -d "node_modules/puppeteer" ]; then
+          npm install --no-save puppeteer
+        fi
+      - |
+        echo "Generating PDF resume..."
+        # Generate PDF using puppeteer (same as CI)
+        node -e '
+          const puppeteer = require("puppeteer");
+          const fs = require("fs");
+          const path = require("path");
+          
+          (async () => {
+            const browser = await puppeteer.launch({
+              headless: true,
+              args: ["--no-sandbox", "--disable-setuid-sandbox"]
+            });
+            
+            const page = await browser.newPage();
+            const htmlPath = path.join(process.cwd(), "resume.html");
+            const htmlContent = fs.readFileSync(htmlPath, "utf8");
+            
+            await page.setContent(htmlContent, { waitUntil: "networkidle0" });
+            
+            await page.pdf({
+              path: "Zoltan_Horvath_CV.pdf",
+              format: "A4",
+              printBackground: true,
+              margin: {
+                top: "0mm",
+                right: "0mm",
+                bottom: "0mm",
+                left: "0mm"
+              }
+            });
+            
+            await browser.close();
+            console.log("✓ PDF generated: {{.RESUME_DIR}}/Zoltan_Horvath_CV.pdf");
+          })();
+        '
+    sources:
+      - resume.html
+    generates:
+      - Zoltan_Horvath_CV.pdf
+
+  open:
+    desc: "Open generated HTML and PDF resume"
+    internal: true
+    dir: "{{.RESUME_DIR}}"
+    cmds:
+      - open resume.html
+      - open Zoltan_Horvath_CV.pdf

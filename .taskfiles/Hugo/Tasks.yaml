@@ -1,0 +1,23 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+tasks:
+
+  dev:
+    desc: "Start Hugo development server"
+    cmds:
+      - |
+        # Kill ALL existing Hugo processes (not just port 1313)
+        if pgrep -q hugo; then
+          echo "Stopping all existing Hugo servers..."
+          pkill -9 hugo 2>/dev/null || true
+          sleep 1
+        fi
+        # Set up trap to kill Hugo on script exit (macOS compatible)
+        trap 'pkill -9 hugo' EXIT
+        # Open browser
+        open http://localhost:1313/
+        # Start Hugo server
+        hugo server --port 1313 --buildDrafts --buildFuture
+    interactive: true
