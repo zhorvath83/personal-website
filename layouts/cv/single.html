@@ -4,7 +4,7 @@
   body {
     overflow-x: hidden;
   }
-  
+
   .cv-full-width {
     width: 100vw !important;
     max-width: 100vw !important;
@@ -12,7 +12,7 @@
     margin-right: calc(50% - 50vw) !important;
     padding: 0 !important;
   }
-  
+
   .cv-download-btn {
     position: fixed;
     bottom: 2rem;
@@ -29,12 +29,12 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
   }
-  
+
   .cv-download-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   }
-  
+
   /* Emoji sötétítése a gombban */
   .cv-download-btn::before {
     content: '📄';
@@ -44,8 +44,8 @@
 </style>
 
 <div class="cv-full-width">
-  <iframe 
-    src="/resume/" 
+  <iframe
+    src="/resume/"
     style="width: 100%; height: calc(100vh - 60px); border: none; display: block;"
     title="CV - Zoltán Horváth"
     id="cv-iframe"
@@ -53,7 +53,7 @@
   </iframe>
 </div>
 
-<a href="/resume/Zoltan_Horvath_CV.pdf" 
+<a href="/resume/Zoltan_Horvath_CV.pdf"
    class="cv-download-btn"
    download>
   Download PDF
@@ -63,22 +63,22 @@
 // PaperMod téma változás figyelése és iframe színek módosítása
 (function() {
   const iframe = document.getElementById('cv-iframe');
-  
+
   function applyThemeToIframe() {
     iframe.onload = function() {
       try {
         const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
         const isDark = document.body.classList.contains('dark');
-        
+
         // Ellenőrizzük van-e már theme style
         let themeStyle = iframeDoc.getElementById('papermod-theme-override');
-        
+
         if (!themeStyle) {
           themeStyle = iframeDoc.createElement('style');
           themeStyle.id = 'papermod-theme-override';
           iframeDoc.head.appendChild(themeStyle);
         }
-        
+
         // Sötét téma kikényszerítése VAGY világos téma kikényszerítése
         if (isDark) {
           // Sötét mód: felülírjuk a színeket ÉS letiltjuk a prefers-color-scheme-et
@@ -106,7 +106,7 @@
                 border-color: rgba(255, 255, 255, 0.2) !important;
               }
             }
-            
+
             /* Sötét mód kikényszerítése */
             body {
               background-color: #111827 !important;
@@ -163,7 +163,7 @@
                 color: #000000 !important;
               }
             }
-            
+
             /* Világos mód kikényszerítése */
             body {
               background-color: #ffffff !important;
@@ -187,11 +187,11 @@
         console.log('CORS miatt nem sikerült CSS-t injektálni:', e);
       }
     };
-    
+
     // Trigger iframe reload
     iframe.src = iframe.src;
   }
-  
+
   // Theme toggle gomb figyelése
   const themeToggle = document.getElementById('theme-toggle');
   if (themeToggle) {
@@ -199,12 +199,12 @@
       setTimeout(applyThemeToIframe, 100);
     });
   }
-  
+
   // Rendszer téma változás figyelése (custom event a extend_head.html-ből)
   window.addEventListener('theme-changed', function() {
     setTimeout(applyThemeToIframe, 100);
   });
-  
+
   // Első betöltéskor is alkalmazzuk
   applyThemeToIframe();
 })();

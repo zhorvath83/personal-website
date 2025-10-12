@@ -81,43 +81,43 @@
   } else {
     initThemeListener();
   }
-  
+
   function initThemeListener() {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    
+
     function handleThemeChange(e) {
       const prefTheme = localStorage.getItem('pref-theme');
-      
+
       // Only intervene if theme is set to auto (or not set)
       if (prefTheme !== null && prefTheme !== 'auto') {
         return;
       }
-      
+
       const isDark = e.matches;
-      
+
       // Update body class
       if (isDark) {
         document.body.classList.add('dark');
       } else {
         document.body.classList.remove('dark');
       }
-      
+
       // Update theme toggle icon
       updateThemeIcon(isDark);
-      
+
       // Trigger custom event for iframe (CV page)
       window.dispatchEvent(new CustomEvent('theme-changed', { detail: { isDark } }));
-      
+
       console.log('System theme changed to:', isDark ? 'dark' : 'light');
     }
-    
+
     function updateThemeIcon(isDark) {
       const themeToggle = document.getElementById('theme-toggle');
       if (!themeToggle) return;
-      
+
       const moonSvg = themeToggle.querySelector('svg[class="moon"]');
       const sunSvg = themeToggle.querySelector('svg[class="sun"]');
-      
+
       if (moonSvg && sunSvg) {
         if (isDark) {
           moonSvg.style.display = 'none';
@@ -128,7 +128,7 @@
         }
       }
     }
-    
+
     mediaQuery.addEventListener('change', handleThemeChange);
     handleThemeChange(mediaQuery);
   }
@@ -141,7 +141,7 @@
    ============================================ */
 (function() {
   console.log('[Typewriter] Script loaded, pathname:', window.location.pathname);
-  
+
   // Only run on home page
   if (window.location.pathname !== '/' && window.location.pathname !== '/index.html') {
     console.log('[Typewriter] Not on home page, skipping');
@@ -156,7 +156,7 @@
     'Kubernetes Enthusiast',
     'DevOps Practitioner'
   ];
-  
+
   let wordIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
@@ -164,63 +164,63 @@
   let typewriterSpan = null;
   let cursorSpan = null;
   let attempts = 0;
-  
+
   // Initialize: find subtitle element and inject typewriter structure
   function init() {
     attempts++;
     console.log('[Typewriter] Init attempt', attempts);
-    
+
     // Find subtitle span in PaperMod profile
-    subtitleElement = document.querySelector('.profile_inner span') || 
+    subtitleElement = document.querySelector('.profile_inner span') ||
                       document.querySelector('.profile .profile_inner span') ||
                       document.querySelector('.profile_inner h1 + span') ||
                       document.querySelector('.profile span');
-    
+
     console.log('[Typewriter] Found element:', subtitleElement);
-    
+
     // Retry if element not found yet (DOM not ready)
     if (!subtitleElement && attempts < 50) {
       setTimeout(init, 100);
       return;
     }
-    
+
     if (!subtitleElement) {
       console.error('[Typewriter] Could not find subtitle element after 50 attempts');
       return;
     }
-    
+
     console.log('[Typewriter] Original subtitle text:', subtitleElement.textContent);
-    
+
     // Clear existing content and create typewriter elements
     subtitleElement.innerHTML = '';
-    
+
     typewriterSpan = document.createElement('span');
     typewriterSpan.id = 'typewriter';
-    
+
     cursorSpan = document.createElement('span');
     cursorSpan.className = 'typewriter-cursor';
     cursorSpan.textContent = '|';
-    
+
     subtitleElement.appendChild(typewriterSpan);
     subtitleElement.appendChild(cursorSpan);
-    
+
     console.log('[Typewriter] Elements created, starting typing in 500ms');
-    
+
     // Start typing animation
     setTimeout(type, 500);
   }
-  
+
   // Main typing/deleting animation loop
   function type() {
     const currentWord = words[wordIndex];
-    
+
     console.log('[Typewriter] Type called - deleting:', isDeleting, 'charIndex:', charIndex, 'word:', currentWord);
-    
+
     if (isDeleting) {
       // Delete one character
       typewriterSpan.textContent = currentWord.substring(0, charIndex - 1);
       charIndex--;
-      
+
       // Finished deleting, move to next word
       if (charIndex === 0) {
         isDeleting = false;
@@ -232,7 +232,7 @@
       // Type one character
       typewriterSpan.textContent = currentWord.substring(0, charIndex + 1);
       charIndex++;
-      
+
       // Finished typing, start deleting after pause
       if (charIndex === currentWord.length) {
         isDeleting = true;
@@ -240,12 +240,12 @@
         return;
       }
     }
-    
+
     // Typing speed: faster when deleting, slower when typing
     const speed = isDeleting ? 50 : 100;
     setTimeout(type, speed);
   }
-  
+
   // Start when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);

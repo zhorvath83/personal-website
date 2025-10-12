@@ -1,10 +1,5 @@
 # Personal Website - Claude AI Instructions
 
-**Working Directory**: `/Users/zhorvath83/Projects/personal/personal-website`  
-**Live Site**: https://horvathzoltan.me  
-**Repository**: https://github.com/zhorvath83/private-website
-
----
 
 ## Tech Stack
 
@@ -189,7 +184,7 @@ git push origin main
 
 ## Deployment Workflow
 
-**Branch**: `main` (direct push)  
+**Branch**: `main` (direct push)
 **Commits**: Flexible style, many small commits OK
 
 ### Automated Pipeline
@@ -271,8 +266,8 @@ Checks on every commit:
 ✅ Social links, CV content
 
 ### Never Commit
-❌ API keys, tokens, passwords  
-❌ Private keys, certificates  
+❌ API keys, tokens, passwords
+❌ Private keys, certificates
 ❌ Build artifacts, CI-generated files
 
 ---

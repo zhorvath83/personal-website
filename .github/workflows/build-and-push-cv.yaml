@@ -1,5 +1,5 @@
-name: Build and push CV 
- 
+name: Build and push CV
+
 on:
   push:
     paths:
@@ -24,7 +24,7 @@ jobs:
           output-type: html
           theme-local: false
           theme-name: jsonresume-theme-reactive
-      
+
       - run: |
           cd resume
           chmod 0777 resume.html
@@ -35,13 +35,13 @@ jobs:
           node -e '
             const fs = require("fs");
             const path = require("path");
-            
+
             // Fájl útvonal
             const filePath = path.join(process.cwd(), "resume/resume.html");
-            
+
             // Olvassuk be a fájlt
             let content = fs.readFileSync(filePath, "utf8");
-            
+
             // PDF oldaltörés javítás - CSS patch beszúrása
             const printCssFix = `<style>
           @media print {
@@ -49,30 +49,30 @@ jobs:
             section, article {
               page-break-inside: auto !important;
             }
-            
+
             /* Keep headers with their content */
             h1, h2, h3, h4, h5, h6 {
               page-break-after: avoid !important;
             }
-            
+
             /* Avoid breaking inside individual work items */
             section > div > article {
               page-break-inside: avoid !important;
             }
-            
+
             /* Grid layout adjustments for print */
             .grid {
               page-break-inside: auto !important;
             }
           }
           </style>`;
-            
+
             // Beszúrjuk a CSS patch-et a </head> elé (csak PDF generáláshoz kell)
             content = content.replace("</head>", `${printCssFix}\n</head>`);
-            
+
             // Írjuk vissza a fájlt
             fs.writeFileSync(filePath, content);
-            
+
             console.log("HTML file successfully modified!");
           '
 
@@ -93,19 +93,19 @@ jobs:
             const puppeteer = require("puppeteer");
             const fs = require("fs");
             const path = require("path");
-            
+
             (async () => {
               const browser = await puppeteer.launch({
                 headless: true,
                 args: ["--no-sandbox", "--disable-setuid-sandbox"]
               });
-              
+
               const page = await browser.newPage();
               const htmlPath = path.join(process.cwd(), "static/resume/index.html");
               const htmlContent = fs.readFileSync(htmlPath, "utf8");
-              
+
               await page.setContent(htmlContent, { waitUntil: "networkidle0" });
-              
+
               await page.pdf({
                 path: "static/resume/Zoltan_Horvath_CV.pdf",
                 format: "A4",
@@ -117,7 +117,7 @@ jobs:
                   left: "0mm"
                 }
               });
-              
+
               await browser.close();
               console.log("PDF successfully generated from modified HTML!");
             })();
