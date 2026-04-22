@@ -10,7 +10,7 @@ This repository contains the source code for my personal website, which includes
 - **PaperMod theme** - Modern, responsive Hugo theme
 - **hugo-notice shortcodes** - Enhanced content formatting
 - **JSON Resume** - Structured CV data format
-- **Cloudflare Pages** - Hosting and auto-deployment from main branch
+- **statichost.eu** - Hosting provider, auto-deployment from main branch
 - **GitHub Actions** - CI/CD pipeline for CV generation
 - **Pre-commit hooks** - Automated security and quality checks
 
@@ -80,10 +80,8 @@ When `resume.json` changes, the pipeline automatically:
 
 ## Deployment
 
-This website is automatically deployed using [Cloudflare Pages](https://pages.cloudflare.com/).
-
 **Deployment Workflow**:
 1. Push changes
 2. If `resume.json` changed: GitHub Action generates HTML + PDF
-3. Cloudflare Pages builds Hugo site and deploys
+3. statichost.eu builds Hugo site and deploys
 4. Live site updates
