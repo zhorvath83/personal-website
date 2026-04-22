@@ -36,6 +36,8 @@ menu:
       weight: 15
 
 module:
+  hugoVersion:
+    min: "0.146.0"
   imports:
     - path: github.com/martignoni/hugo-notice
     - path: github.com/adityatelange/hugo-PaperMod

@@ -53,11 +53,25 @@
   </iframe>
 </div>
 
-<a href="/resume/Zoltan_Horvath_CV.pdf"
-   class="cv-download-btn"
-   download>
-  Download PDF
-</a>
+{{- /*
+  PDF LETÖLTÉS GOMB — OBFUSZKÁLT LINK
+  A PDF elérési útja plain text formában nem szerepel a forrásban,
+  hogy az automatikus scrapereket gátoljuk a PDF közvetlen
+  megtalálásában és letöltésében.
+*/}}
+<span id="cv-pdf-dl"></span>
+<script>
+/* ============================================
+   PDF LETÖLTÉS GOMB — OBFUSZKÁLT LINK
+   A PDF útvonala base64-kódoltan tárolódik,
+   JS futtatja össze és hozza létre a gombot.
+   ============================================ */
+(function(){
+  var p = atob('L3Jlc3VtZS9ab2x0YW5fSG9ydmF0aF9DVi5wZGY=');
+  var n = document.getElementById('cv-pdf-dl');
+  if(n) n.outerHTML = '<a href="' + p + '" class="cv-download-btn" download>Download PDF<\/a>';
+})();
+</script>
 
 <script>
 // PaperMod téma változás figyelése és iframe színek módosítása

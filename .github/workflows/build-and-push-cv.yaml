@@ -70,6 +70,48 @@ jobs:
             // Beszúrjuk a CSS patch-et a </head> elé (csak PDF generáláshoz kell)
             content = content.replace("</head>", `${printCssFix}\n</head>`);
 
+            // ============================================
+            // CONTACT OBFUSZKÁCIÓ — BOT VÉDELEM
+            // ============================================
+            // Az email és telefonszám plain text formában nem szerepel a
+            // HTML forrásban. A böngésző JS futtatáskor rakja össze őket
+            // a DOM-ba, statikus scrapererek ezért nem találják meg.
+            //
+            // A Puppeteer-rel generált PDF-be az adatok helyesen kerülnek
+            // be, mert a PDF generálás előtt a JS végrehajtódik
+            // (waitUntil: "networkidle0" biztosítja ezt).
+            //
+            // Kódolás: btoa(reverse(érték)) — minden adat megfordítva,
+            // majd base64-kódolva tárolódik. A protokoll prefix (mailto:,
+            // tel:) szintén kódolt, hogy ne legyen árulkodó mintaillesztési
+            // pont a forrásban.
+            // ============================================
+
+            // E-mail
+            const emailObfuscated = `<span id="cv-em"></span><script>(function(){` +
+              `var p=[atob("dGNhdG5vYw=="),atob("ZW0ubmF0bG96aHRhdnJvaA==")];` +
+              `var r=function(s){return s.split("").reverse().join("")};` +
+              `var e=r(p[0])+"@"+r(p[1]);` +
+              `var m=atob("bWFpbHRvOg==");` +
+              `var q=String.fromCharCode(34);` +
+              `var n=document.getElementById("cv-em");` +
+              `if(n)n.outerHTML="<a href="+q+m+e+q+">"+e+"<\\/a>";` +
+              `})()</script>`;
+            content = content.replace(/<a href="mailto:[^"]*">[^<]*<\/a>/, emailObfuscated);
+
+            // Telefonszám
+
+            const phoneObfuscated = `<span id="cv-ph"></span><script>(function(){` +
+              `var p=[atob("MjY2MTY0OTAzNjM="),atob("MjY2MSA2NDkgKTAzKCA2Mys=")];` +
+              `var r=function(s){return s.split("").reverse().join("")};` +
+              `var h=r(p[0]);var d=r(p[1]);` +
+              `var m=atob("dGVsOg==");` +
+              `var q=String.fromCharCode(34);` +
+              `var n=document.getElementById("cv-ph");` +
+              `if(n)n.outerHTML="<a href="+q+m+h+q+">"+d+"<\\/a>";` +
+              `})()</script>`;
+            content = content.replace(/<a href="tel:[^"]*">[^<]*<\/a>/, phoneObfuscated);
+
             // Írjuk vissza a fájlt
             fs.writeFileSync(filePath, content);
 
