@@ -92,6 +92,3 @@ params:
     - name: github
       title: GitHub
       url: 'https://github.com/zhorvath83'
-    - name: codepen
-      title: My tech stack
-      url: 'https://stackshare.io/zhorvath83/my-stack'

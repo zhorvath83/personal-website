@@ -6,7 +6,7 @@
 - **Hugo** (Go-based static site generator)
 - **PaperMod theme** + hugo-notice shortcodes
 - **JSON Resume** for CV generation
-- **Cloudflare Pages** (auto-deploy from main)
+- **statichost.eu** (auto-deploy from main)
 - **GitHub Actions** (CI/CD for CV build)
 - **Pre-commit hooks** (auto-run on commit)
 
@@ -195,12 +195,12 @@ Push to main
 ├─→ resume.json changed?
 │   └─→ GitHub Action: Generate HTML + PDF → Commit to static/resume/
 │
-└─→ Cloudflare Pages: hugo build → Deploy
+└─→ GitHub webhook → statichost.eu: hugo build → Deploy
 ```
 
 **Monitoring**:
 - GitHub Actions: Repository → Actions tab
-- Cloudflare: Dashboard → Pages → personal-website
+- statichost.eu: Dashboard → personal-website
 
 ---
 
@@ -287,9 +287,9 @@ cat resume/resume.json | jq empty  # Validate JSON
 # Check GitHub Actions logs
 ```
 
-**Cloudflare deploy fails**:
+**statichost.eu deploy fails**:
 ```bash
-# Check Cloudflare Dashboard → Pages → Deployments
+# Check statichost.eu Dashboard → Deployments
 hugo check  # Usually config syntax error
 ```
 
