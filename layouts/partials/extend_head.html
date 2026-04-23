@@ -271,6 +271,7 @@
    - social links (linkedin, github)
    - nav clicks (private-cloud)
    - CV PDF download
+   - theme toggle (light/dark)
    Uses pointerdown to fire earlier than click, so tracking
    request is initiated before any navigation/download side-effects.
    ============================================ */
@@ -279,6 +280,20 @@
 
   function track(e) {
     if (typeof MDAL === 'undefined') return;
+
+    // Theme toggle button (PaperMod <button id="theme-toggle">)
+    var toggle = e.target.closest('#theme-toggle');
+    if (toggle) {
+      if (fired.has(toggle)) return;
+      // At pointerdown/click time the class reflects the CURRENT state;
+      // the NEXT state is its inverse.
+      var nextTheme = document.body.classList.contains('dark') ? 'light' : 'dark';
+      MDAL.event({"Name": "theme-toggle", "ClientId": null, "Parameters": [{"Name": "to", "Value": nextTheme}]});
+      fired.add(toggle);
+      setTimeout(function() { fired.delete(toggle); }, 1000);
+      return;
+    }
+
     var a = e.target.closest('a');
     if (!a || fired.has(a)) return;
     var href = a.getAttribute('href') || '';
