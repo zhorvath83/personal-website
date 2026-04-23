@@ -267,7 +267,8 @@
 
 /* ============================================
    SITESIGHTS EVENT TRACKING
-   Click events: social links, nav, CV download
+   Click events: social links (linkedin, github), nav (private-cloud)
+   CV download is tracked separately in layouts/cv/single.html
    ============================================ */
 (function() {
   document.addEventListener('click', function(e) {
@@ -282,8 +283,6 @@
       MDAL.event({"Name": "social-link", "ClientId": null, "Parameters": [{"Name": "type", "Value": "github"}]});
     } else if (href.includes('dash.horvathzoltan.me')) {
       MDAL.event({"Name": "nav-click", "ClientId": null, "Parameters": [{"Name": "type", "Value": "private-cloud"}]});
-    } else if (a.classList.contains('cv-download-btn')) {
-      MDAL.event({"Name": "cv-download", "ClientId": null, "Parameters": []});
     }
   });
 })();
