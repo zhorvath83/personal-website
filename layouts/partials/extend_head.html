@@ -267,14 +267,20 @@
 
 /* ============================================
    SITESIGHTS EVENT TRACKING
-   Click events: social links (linkedin, github), nav (private-cloud)
-   CV download is tracked separately in layouts/cv/single.html
+   Centralized delegated click handler for all tracked events:
+   - social links (linkedin, github)
+   - nav clicks (private-cloud)
+   - CV PDF download
+   Uses pointerdown to fire earlier than click, so tracking
+   request is initiated before any navigation/download side-effects.
    ============================================ */
 (function() {
-  document.addEventListener('click', function(e) {
+  var fired = new WeakSet();
+
+  function track(e) {
     if (typeof MDAL === 'undefined') return;
     var a = e.target.closest('a');
-    if (!a) return;
+    if (!a || fired.has(a)) return;
     var href = a.getAttribute('href') || '';
 
     if (href.includes('linkedin.com')) {
@@ -283,7 +289,16 @@
       MDAL.event({"Name": "social-link", "ClientId": null, "Parameters": [{"Name": "type", "Value": "github"}]});
     } else if (href.includes('dash.horvathzoltan.me')) {
       MDAL.event({"Name": "nav-click", "ClientId": null, "Parameters": [{"Name": "type", "Value": "private-cloud"}]});
+    } else if (href.indexOf('Zoltan_Horvath_CV.pdf') !== -1) {
+      MDAL.event({"Name": "cv-download", "ClientId": null, "Parameters": [{"Name": "type", "Value": "pdf"}]});
+    } else {
+      return;
     }
-  });
+    fired.add(a);
+    setTimeout(function() { fired.delete(a); }, 1000);
+  }
+
+  document.addEventListener('pointerdown', track, true);
+  document.addEventListener('click', track, true);
 })();
 </script>

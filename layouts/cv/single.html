@@ -58,29 +58,15 @@
   A PDF elérési útja plain text formában nem szerepel a forrásban,
   hogy az automatikus scrapereket gátoljuk a PDF közvetlen
   megtalálásában és letöltésében.
+  A letöltési esemény trackelését a layouts/partials/extend_head.html
+  központi delegált handlere végzi (href alapú illesztés).
 */}}
 <span id="cv-pdf-dl"></span>
 <script>
-/* ============================================
-   PDF LETÖLTÉS GOMB — OBFUSZKÁLT LINK
-   A PDF útvonala base64-kódoltan tárolódik,
-   JS futtatja össze és hozza létre a gombot.
-   ============================================ */
 (function(){
   var p = atob('L3Jlc3VtZS9ab2x0YW5fSG9ydmF0aF9DVi5wZGY=');
   var n = document.getElementById('cv-pdf-dl');
-  if(n) {
-    n.outerHTML = '<a href="' + p + '" class="cv-download-btn" download>Download PDF<\/a>';
-    // Sitesights: CV download event tracking
-    var btn = document.querySelector('.cv-download-btn');
-    if (btn) {
-      btn.addEventListener('click', function() {
-        if (typeof MDAL !== 'undefined') {
-          MDAL.event({"Name": "cv-download", "ClientId": null, "Parameters": []});
-        }
-      });
-    }
-  }
+  if(n) n.outerHTML = '<a href="' + p + '" class="cv-download-btn" download>Download PDF<\/a>';
 })();
 </script>
 
