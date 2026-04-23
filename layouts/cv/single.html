@@ -75,11 +75,42 @@
 (function() {
   const iframe = document.getElementById('cv-iframe');
 
+  // Sitesights: iframe-en belüli linkekre (linkedin, github) eventet kötünk.
+  // Iframe-ből a click nem bubbol a szülőre, ezért külön kell injektálni.
+  // Azonos origin (/resume/), így a contentDocument hozzáférhető.
+  function injectIframeTracking(iframeDoc) {
+    if (iframeDoc.__sitesightsBound) return;
+    iframeDoc.__sitesightsBound = true;
+
+    const fired = new WeakSet();
+    function track(e) {
+      const mdal = (window.parent && window.parent.MDAL) || null;
+      if (!mdal) return;
+      const a = e.target.closest('a');
+      if (!a || fired.has(a)) return;
+      const href = a.getAttribute('href') || '';
+
+      if (href.includes('linkedin.com')) {
+        mdal.event({"Name": "social-link", "ClientId": null, "Parameters": [{"Name": "type", "Value": "linkedin"}]});
+      } else if (href.includes('github.com/zhorvath83')) {
+        mdal.event({"Name": "social-link", "ClientId": null, "Parameters": [{"Name": "type", "Value": "github"}]});
+      } else {
+        return;
+      }
+      fired.add(a);
+      setTimeout(() => fired.delete(a), 1000);
+    }
+    iframeDoc.addEventListener('pointerdown', track, true);
+    iframeDoc.addEventListener('click', track, true);
+  }
+
   function applyThemeToIframe() {
     iframe.onload = function() {
       try {
         const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
         const isDark = document.body.classList.contains('dark');
+
+        injectIframeTracking(iframeDoc);
 
         // Ellenőrizzük van-e már theme style
         let themeStyle = iframeDoc.getElementById('papermod-theme-override');
