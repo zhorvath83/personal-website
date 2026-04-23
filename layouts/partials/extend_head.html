@@ -264,4 +264,27 @@
     init();
   }
 })();
+
+/* ============================================
+   SITESIGHTS EVENT TRACKING
+   Click events: social links, nav, CV download
+   ============================================ */
+(function() {
+  document.addEventListener('click', function(e) {
+    if (typeof MDAL === 'undefined') return;
+    var a = e.target.closest('a');
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+
+    if (href.includes('linkedin.com')) {
+      MDAL.event({"Name": "social-link", "ClientId": null, "Parameters": [{"Name": "type", "Value": "linkedin"}]});
+    } else if (href.includes('github.com/zhorvath83')) {
+      MDAL.event({"Name": "social-link", "ClientId": null, "Parameters": [{"Name": "type", "Value": "github"}]});
+    } else if (href.includes('dash.horvathzoltan.me')) {
+      MDAL.event({"Name": "nav-click", "ClientId": null, "Parameters": [{"Name": "type", "Value": "private-cloud"}]});
+    } else if (a.classList.contains('cv-download-btn')) {
+      MDAL.event({"Name": "cv-download", "ClientId": null, "Parameters": []});
+    }
+  });
+})();
 </script>
