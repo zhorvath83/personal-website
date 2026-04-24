@@ -6,6 +6,7 @@
 - **Hugo** (Go-based static site generator)
 - **PaperMod theme** + hugo-notice shortcodes
 - **JSON Resume** for CV generation
+- **Sitesights** (web analytics, `app-static.sitesights.io`) — pageview + events: social links, nav, CV download
 - **statichost.eu** (auto-deploy from main)
 - **GitHub Actions** (CI/CD for CV build)
 - **Pre-commit hooks** (auto-run on commit)
