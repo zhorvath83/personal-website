@@ -58,8 +58,15 @@
 .main .profile .profile_inner > img {
   margin-top: -10px !important;
   transform: translateY(-15px) !important;
+  object-fit: cover;
   /* Animation speed */
   animation: image-blob 20s ease-in-out infinite !important;
+}
+
+@media screen and (max-width: 768px) {
+  .main .profile .profile_inner > img {
+    transform: translateY(-15px) scale(0.85) !important;
+  }
 }
 
 @keyframes image-blob {
