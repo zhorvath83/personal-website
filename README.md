@@ -1,5 +1,7 @@
 # My Personal Website
 
+[![Hosted on statichost.eu](https://builder.statichost.eu/zhorvath83-personal-website/status.svg)](https://www.statichost.eu)
+
 This repository contains the source code for my personal website, which includes my resume and other relevant information about my professional background.
 
 ---
