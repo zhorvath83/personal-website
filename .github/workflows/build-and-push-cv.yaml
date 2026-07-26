@@ -124,7 +124,7 @@ jobs:
           cp resume/resume.html static/resume/index.html
 
       - name: Setup Node.js for PDF generation
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: '24'
 
